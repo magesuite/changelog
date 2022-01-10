@@ -1,0 +1,34 @@
+{
+    "changelog_entity": {
+        "column": {
+            "changelog_id": true,
+            "version": true,
+            "module": true,
+            "description": true,
+            "url": true,
+            "ticket_id": true,
+            "version_date": true,
+            "change_type": true,
+            "change_overview": true,
+            "change_description": true,
+            "change_url": true,
+            "highlighted": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        },
+        "index": {
+            "CHANGELOG_ENTITY_MODULE": true,
+            "CHANGELOG_ENTITY_VERSION_DATE": true
+        }
+    },
+    "changelog_deployment": {
+        "column": {
+            "deployment_id": true,
+            "deployed_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

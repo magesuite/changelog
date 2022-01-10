@@ -1,0 +1,74 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:MageSuite_Changelog:etc/changelog.xsd">
+    <module
+        id="MageSuite_Changelog"
+        name="Magesuite_Changelog"
+        description="This module allows to gather and display changelog entries from all compatible extensions."
+        url="https://github.com/magesuite/changelog">
+            <changelog>
+                <tag version="1.0.0" date="2021-03-12">
+                    <entry>
+                        <type>INIT</type>
+                        <overview>Initial release</overview>
+                        <description></description>
+                    </entry>
+                </tag>
+                <tag version="1.0.1" date="2021-03-13">
+                    <entry>
+                        <type>FIX</type>
+                        <overview>Fixed typo in classname</overview>
+                    </entry>
+                    <entry>
+                        <type>FIX</type>
+                        <overview>Added exception for...</overview>
+                    </entry>
+                </tag>
+                <tag version="1.1.0" date="2021-03-16">
+
+                    <entry>
+                        <type>FEATURE</type>
+                        <overview>Added view to display log as timeline - sorted by version date, descending</overview>
+                    </entry>
+                    <entry>
+                        <type>FEATURE</type>
+                        <overview>Added option to preselect ranges of time in filter options toolbar.</overview>
+                    </entry>
+                    <entry>
+                        <type>PERFORMANCE</type>
+                        <overview>Changelog entries are now stored in Magento cache.</overview>
+                    </entry>
+                    <entry>
+                        <type>STYLE</type>
+                        <overview>Refactored and improved look and feel of filtering toolbar.</overview>
+                    </entry>
+                </tag>
+                <tag version="1.2.0" date="2021-03-22">
+                    <entry>
+                        <type>FEATURE</type>
+                        <overview>Better handling of arrays.</overview>
+                    </entry>
+                    <entry>
+                        <type>IMPROVEMENT</type>
+                        <overview>Codestyle updates to match MageSuite requirements.</overview>
+                    </entry>
+                    <entry>
+                        <type>IMPROVEMENT</type>
+                        <overview>Added command to list changelog (helps with testing).</overview>
+                    </entry>
+                </tag>
+                <tag version="1.2.1" date="2022-01-08">
+                    <entry>
+                        <type>REFACTOR</type>
+                        <overview>Refactor and cleanup to make code more readable.</overview>
+                    </entry>
+                    <entry>
+                        <type>REFACTOR</type>
+                        <overview>Adjusted codestyle to match MageSuite requirements.</overview>
+                    </entry>
+                    <entry>
+                        <type>FIX</type>
+                        <overview>Broken XMLs (bad syntax) will be ignore and will not throw exception.</overview>
+                    </entry>
+                </tag>
+            </changelog>
+    </module>
+</config>

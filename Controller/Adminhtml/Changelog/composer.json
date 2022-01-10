@@ -1,0 +1,14 @@
+{
+    "name": "vendor_name/Changelog",
+    "description": "description",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "adamkarnowka",
+            "email": "email@example.com"
+        }
+    ],
+    "require": {
+    }
+}

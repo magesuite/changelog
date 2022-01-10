@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+	<table name="changelog_entity" resource="default" engine="innodb" comment="Changelog Table">
+		<column name="changelog_id" xsi:type="bigint" padding="6" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
+		<column name="module" nullable="true" xsi:type="varchar" comment="Module Id" length="255"/>
+		<column name="version" nullable="true" xsi:type="varchar" comment="version" length="16"/>
+		<column name="description" nullable="true" xsi:type="text" comment="Description"/>
+		<column name="url" nullable="true" xsi:type="varchar" length="255" comment="Url"/>
+		<column name="ticket_id" nullable="true" xsi:type="varchar" length="32" comment="Description"/>
+		<column name="version_date" nullable="true" xsi:type="date" comment="Date of change"/>
+		<column name="change_type" nullable="true" xsi:type="varchar" comment="Type of change" length="32"/>
+		<column name="change_overview" nullable="true" xsi:type="text" comment="Overview of change" />
+		<column name="change_description" nullable="true" xsi:type="text" comment="Long description of change" />
+		<column name="change_url" nullable="true" xsi:type="varchar" length="255" comment="Url to change descrption" />
+		<column name="highlighted" nullable="true" xsi:type="smallint" comment="Url to change descrption" />
+
+		<constraint xsi:type="primary" referenceId="PRIMARY">
+			<column name="changelog_id"/>
+		</constraint>
+
+		<index referenceId="CHANGELD_ENTITY_MODULE_INDEX" indexType="btree">
+			<column name="module"/>
+		</index>
+		<index referenceId="CHANGELD_ENTITY_DATE_INDEX" indexType="btree">
+			<column name="version_date"/>
+		</index>
+
+	</table>
+	<table name="changelog_deployment" resource="default" engine="innodb" comment="magesuite_changelog_deployment Table">
+		<column xsi:type="smallint" name="deployment_id" padding="6" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
+		<constraint xsi:type="primary" referenceId="PRIMARY">
+			<column name="deployment_id"/>
+		</constraint>
+
+		<column name="deployed_at" nullable="true" xsi:type="datetime" comment="deployed_at"/>
+	</table>
+</schema>
