@@ -20,5 +20,4 @@ class Changelog extends \Magento\Backend\Block\Template{
     public function getConfiguration($key){
       return $this->configuration->getConfigurationForKey($key);
     }
-
 }
