@@ -21,11 +21,14 @@ use Magento\Indexer\Model\ResourceModel\Indexer\State\CollectionFactory;
 class Recurring implements \Magento\Framework\Setup\InstallSchemaInterface
 {
     protected $processChangelog;
+    protected $createDeploymentMarker;
 
     public function __construct(
-    \MageSuite\Changelog\Service\ProcessChangelog $processChangelog
+        \MageSuite\Changelog\Service\ProcessChangelog $processChangelog,
+        \MageSuite\Changelog\Service\Deployment\CreateDeploymentMarker $createDeploymentMarker
     ) {
         $this->processChangelog = $processChangelog;
+        $this->createDeploymentMarker = $createDeploymentMarker;
     }
 
     /**
@@ -33,6 +36,8 @@ class Recurring implements \Magento\Framework\Setup\InstallSchemaInterface
      */
     public function install(SchemaSetupInterface $setup, ModuleContextInterface $context)
     {
-        $this->processChangelog->execute();;
+        $this->processChangelog->execute();
+        ;
+        $this->createDeploymentMarker->execute();
     }
 }

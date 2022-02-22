@@ -13,7 +13,8 @@ class GetChangelogEntries {
         $this->changelogRepository = $changelogRepository;
     }
 
-    public function execute($criteria = null, $mode = 'grouped'){
+    public function execute($criteria = null, $mode = 'grouped'): array
+    {
         if($mode=='grouped') {
             $entries = $this->changelogRepository->getListAsNestedArray($criteria, $groupingKey = 'module');
         } else {

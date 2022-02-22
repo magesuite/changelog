@@ -2,11 +2,13 @@
 
 namespace MageSuite\Changelog\Service;
 
-class GroupChangelogByKey{
+class GroupChangelogByKey
+{
 
-    public function execute($changelog, $key = 'module'){
+    public function execute($changelog, $key = 'module'): array
+    {
         $result = [];
-        foreach($changelog as $entry){
+        foreach ($changelog as $entry) {
             $result[$entry[$key]][$entry['version']][] = $entry;
         }
 

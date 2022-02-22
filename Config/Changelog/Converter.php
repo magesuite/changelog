@@ -1,8 +1,5 @@
 <?php
-/**
- * Copyright ©  All rights reserved.
- * See COPYING.txt for license details.
- */
+
 declare(strict_types=1);
 
 namespace MageSuite\Changelog\Config\Changelog;
@@ -16,10 +13,8 @@ class Converter implements \Magento\Framework\Config\ConverterInterface
      * @param \DOMDocument $source
      * @return array
      */
-    public function convert($source)
+    public function convert($source): array
     {
-        echo get_class($source);die();
-        var_dump($source);die();
         $output = [];
         $xpath = new \DOMXPath($source);
         $nodes = $xpath->evaluate('/config/module');
@@ -34,7 +29,6 @@ class Converter implements \Magento\Framework\Config\ConverterInterface
             $data['url'] = $node->getAttribute('url');
 
             $data['tags'] = [];
-
 
             foreach ($node->childNodes as $childNode) {
                 if ($childNode->nodeType != XML_ELEMENT_NODE) {
@@ -55,6 +49,7 @@ class Converter implements \Magento\Framework\Config\ConverterInterface
                         if ($changeNode->nodeType != XML_ELEMENT_NODE) {
                             continue;
                         }
+
                         foreach($changeNode->childNodes as $changeDetails){
                             if ($changeDetails->nodeType != XML_ELEMENT_NODE) {
                                 continue;

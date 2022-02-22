@@ -10,8 +10,8 @@ namespace MageSuite\Changelog\Api\Data;
 interface DeploymentInterface extends \Magento\Framework\Api\ExtensibleDataInterface
 {
 
-    const DEPLOYED_AT = 'deployed_at';
-    const DEPLOYMENT_ID = 'deployment_id';
+    public const DEPLOYED_AT = 'deployed_at';
+    public const DEPLOYMENT_ID = 'deployment_id';
 
     /**
      * Get deployment_id

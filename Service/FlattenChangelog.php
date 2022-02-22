@@ -2,20 +2,20 @@
 
 namespace MageSuite\Changelog\Service;
 
-class FlattenChangelog {
-
-
-    public function execute($changelogData){
+class FlattenChangelog
+{
+    public function execute($changelogData)
+    {
         $entries = [];
 
-        foreach($changelogData as $moduleName => $changlogEntry){
+        foreach ($changelogData as $moduleName => $changlogEntry) {
             $entry['module'] = $moduleName;
             $entry['description'] = $changlogEntry['description'];
             $entry['url'] = $changlogEntry['url'];
-            foreach($changlogEntry['tags'] as $tag){
+            foreach ($changlogEntry['tags'] as $tag) {
                 $entry['version'] = $tag['version'];
                 $entry['version_date'] = $tag['date'];
-                foreach($tag['changes'] as $change){
+                foreach ($tag['changes'] as $change) {
                     $entry['change_type'] = $change['type'];
                     $entry['change_overview'] = $change['overview'];
                     $entry['change_description'] = $tag['description'] ?? '';

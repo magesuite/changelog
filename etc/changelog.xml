@@ -16,17 +16,19 @@
                     <entry>
                         <type>FIX</type>
                         <overview>Fixed typo in classname</overview>
+                        <description>Some description...</description>
                     </entry>
                     <entry>
                         <type>FIX</type>
                         <overview>Added exception for...</overview>
+                        <url>https://www.google.com/?test</url>
                     </entry>
                 </tag>
                 <tag version="1.1.0" date="2021-03-16">
-
                     <entry>
                         <type>FEATURE</type>
                         <overview>Added view to display log as timeline - sorted by version date, descending</overview>
+                        <ticket_id>MGS-1000</ticket_id>
                     </entry>
                     <entry>
                         <type>FEATURE</type>

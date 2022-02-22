@@ -1,40 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-	<xs:element name="config">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="module">
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element name="changelog">
-								<xs:complexType>
-									<xs:sequence>
-										<xs:element name="tag" maxOccurs="unbounded" minOccurs="0">
-											<xs:complexType>
-												<xs:sequence>
-													<xs:element name="entry" maxOccurs="unbounded" minOccurs="0">
-														<xs:complexType>
-															<xs:sequence>
-																<xs:element type="xs:string" name="type"/>
-																<xs:element type="xs:string" name="overview"/>
-																<xs:element type="xs:string" name="description" minOccurs="0"/>
-															</xs:sequence>
-														</xs:complexType>
-													</xs:element>
-												</xs:sequence>
-												<xs:attribute type="xs:string" name="version" use="optional"/>
-											</xs:complexType>
-										</xs:element>
-									</xs:sequence>
-								</xs:complexType>
-							</xs:element>
-						</xs:sequence>
-						<xs:attribute type="xs:string" name="id"/>
-						<xs:attribute type="xs:string" name="name"/>
-						<xs:attribute type="xs:string" name="description"/>
-						<xs:attribute type="xs:string" name="url"/>
-					</xs:complexType>
-				</xs:element>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+  <xs:element name="config" type="configType"/>
+  <xs:complexType name="entryType">
+    <xs:sequence>
+      <xs:element name="type">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="INIT"/>
+            <xs:enumeration value="FIX"/>
+            <xs:enumeration value="FEATURE"/>
+            <xs:enumeration value="PERFORMANCE"/>
+            <xs:enumeration value="STYLE"/>
+            <xs:enumeration value="IMPROVEMENT"/>
+            <xs:enumeration value="REFACTOR"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="overview"/>
+      <xs:element name="description" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value=""/>
+            <xs:enumeration value="Some description..."/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="url" minOccurs="0"/>
+      <xs:element type="xs:string" name="ticket_id" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="tagType">
+    <xs:sequence>
+      <xs:element type="entryType" name="entry" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="version" use="optional"/>
+    <xs:attribute type="xs:string" name="date" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="changelogType">
+    <xs:sequence>
+      <xs:element type="tagType" name="tag" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="moduleType">
+    <xs:sequence>
+      <xs:element type="changelogType" name="changelog"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="id"/>
+    <xs:attribute type="xs:string" name="name"/>
+    <xs:attribute type="xs:string" name="description"/>
+    <xs:attribute type="xs:string" name="url"/>
+  </xs:complexType>
+  <xs:complexType name="configType">
+    <xs:sequence>
+      <xs:element type="moduleType" name="module"/>
+    </xs:sequence>
+  </xs:complexType>
 </xs:schema>

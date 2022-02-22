@@ -1,13 +1,12 @@
 define([
     'jquery',
     'mage/translate',
-    'https://www.gstatic.com/charts/loader.js',
     'moment',
     'mage/calendar'
-], function ($, t, g, moment) {
+], function ($, t,  moment) {
     "use strict";
     return function (config) {
-
+        console.log(config);
         let fromPicker = $('#from-picker');
         let toPicker = $('#to-picker');
 
@@ -34,10 +33,10 @@ define([
             toPicker.val(to);
 
             fromPicker.attr('disabled', 'disabled');
-            jQuery('#historic-to input').addClass('disabled')
+            jQuery('#changelog-to input').addClass('disabled')
 
             toPicker.attr('disabled', 'disabled');
-            jQuery('#historic-from input').addClass('disabled')
+            jQuery('#changelog-from input').addClass('disabled')
         });
 
         $('#time-helper').on('change', function(){
@@ -60,28 +59,28 @@ define([
                 dateTo = moment().utc().format('YYYY-MM-DD');
             }
             if(chosenOption=='last_deployment'){
-                dateFrom = moment().utc().subtract(1, 'month').format('YYYY-MM-DD');
+                dateFrom = moment().utc().format(config.lastDeploymentDate,'YYYY-MM-DD');
                 dateTo = moment().utc().format('YYYY-MM-DD');
             }
             if(chosenOption=='custom_range'){
                 dateTo = moment().utc().format('YYYY-MM-DD');
                 disabled = false;
-                $('#historic-from button').click();
+                $('#changelog-from button').click();
             }
 
             if(disabled){
                 fromPicker.attr('disabled', 'disabled');
-                jQuery('#historic-to input').addClass('disabled')
+                jQuery('#changelog-to input').addClass('disabled')
 
                 toPicker.attr('disabled', 'disabled');
-                jQuery('#historic-from input').addClass('disabled')
+                jQuery('#changelog-from input').addClass('disabled')
             } else {
 
                 fromPicker.removeAttr('disabled');
-                jQuery('#historic-to input').removeClass('disabled')
+                jQuery('#changelog-to input').removeClass('disabled')
 
                 toPicker.removeAttr('disabled');
-                jQuery('#historic-from input').removeClass('disabled')
+                jQuery('#changelog-from input').removeClass('disabled')
             }
             fromPicker.val(dateFrom);
             toPicker.val(dateTo);
@@ -89,13 +88,13 @@ define([
 
         });
 
-        $('#apply-historic-stats').on('click', function () {
+        $('#get-changelog-button').on('click', function () {
 
             let mode = $("input:radio[name ='mode']:checked").val();
-            /* Init charts */
+
             $.ajax({
                 type: "GET",
-                url: config.baseChangelogUrl+'mode/'+mode,
+                url: config.baseChangelogUrl+'mode/'+mode+'/from/'+$('#from-picker').val()+'/to/'+$('#to-picker').val(),
                 showLoader: true,
             }).done(function (results) {
                 if (results.status !== false) {
@@ -105,10 +104,10 @@ define([
                         renderTimeline(results)
                     }
                 } else {
-                    alert('failed');
+                    console.log('Failed to fetch changelog data.')
                 }
             }).fail(function () {
-
+                console.log('Failed to fetch changelog data.');
             });
 
         });
@@ -145,22 +144,38 @@ define([
             let i = 0;
             jQuery.each(json, function(key, val) {
                 i++;
-                html += '<div class="changelog-module timeline">'+val.version_date+': '+val.module+' '+getIconForChangeType(val.change_type)+' '+val.change_overview+'</div>'
-                if(i%5==0)html += '<div class="changelog-module timeline deployment">- DEPLOYMENT (13.03.2021) -</div>';
+                html += '<div class="changelog-module timeline">'
+                        +'<span class="date">'+val.version_date+'</span>: '+val.module+' '+getIconForChangeType(val.change_type)+' '+val.change_overview+
+                    '</div>'
             });
             html += '</div>';
 
+            let deploymentMarker = '<div class="changelog-module timeline deployment">- DEPLOYMENT ('+config.lastDeploymentDate+') -</div>';
+
+
             jQuery('#changelog-content').html(html);
+
+            var marked = false;
+            jQuery('div.timeline').each(function(i,el){
+                let changeDate = jQuery(el).find('span.date').text();
+                if(changeDate < config.lastDeploymentDate && !marked){
+                    jQuery(deploymentMarker).insertBefore(el)
+                    marked = true;
+                }
+            });
         }
 
         function renderResults(json){
             let html = '<div class="changelog-wrapper">';
             let descriptions = [];
             let dates = [];
+            let links = [];
+
             let v=0;
             jQuery.each(json, function(key, val) {
+
                 let moduleHtml = '<div class="changelog-module"><div class="module-header"><span class="module-name">'+key+'</span>' +
-                    '<span class="module-info">?</span>' +
+                    '<span onclick="" class="module-info link">?</span>' +
                     '<span class="module-description"></span></div><div class="module-content">';
 
                 jQuery.each(val, function(version, changes){
@@ -176,8 +191,12 @@ define([
                           changeHtml += '<span class="ticket" '+ticketUrl+'>'+change.ticket_id+'</span>';
                       }
 
+                      if(change.change_url){
+                          changeHtml += '<a href="'+change.change_url+'" target="_blank"><span class="see-more">See more</span></a>';
+                      }
 
                       descriptions[key] = change.description;
+                      links[key] = change.url;
                       dates['tag_'+v] = change.version_date;
 
                       changeHtml += '</div>';
@@ -187,7 +206,6 @@ define([
                 });
 
                 moduleHtml += '</div></div>';
-
                 html += moduleHtml;
             });
 
@@ -201,6 +219,7 @@ define([
                 }
 
                 jQuery('div.module-header:contains("' + index + '")').find('span.module-description').html(descriptions[index])
+                jQuery('div.module-header:contains("' + index + '")').find('span.link').attr('onclick', 'window.open("'+links[index]+'")');
             }
 
             for (var index in dates) {

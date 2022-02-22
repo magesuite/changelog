@@ -9,72 +9,43 @@ use MageSuite\Changelog\Api\Data\ChangelogInterface;
 class Changelog extends \Magento\Framework\Api\AbstractSimpleObject implements ChangelogInterface
 {
 
-    /**
-     * Get changelog_id
-     * @return string|null
-     */
     public function getChangelogId()
     {
         return $this->_get(self::CHANGELOG_ID);
     }
 
-    /**
-     * Set changelog_id
-     * @param string $changelogId
-     * @return \MageSuite\Changelog\Api\Data\ChangelogInterface
-     */
     public function setChangelogId($changelogId)
     {
         return $this->setData(self::CHANGELOG_ID, $changelogId);
     }
 
-    /**
-     * Get version
-     * @return string|null
-     */
     public function getVersion()
     {
         return $this->_get(self::VERSION);
     }
 
-    /**
-     * @param $module
-     * @return ChangelogInterface|Changelog
-     */
     public function setModule($module)
     {
         return $this->setData(self::MODULE, $module);
     }
 
-    /**
-     * @return mixed|string|null
-     */
+
     public function getModule()
     {
         return $this->_get(self::MODULE);
     }
 
-    /**
-     * @param $description
-     * @return ChangelogInterface|Changelog
-     */
     public function setDescription($description)
     {
         return $this->setData(self::DESCRIPTION, $description);
     }
 
-    /**
-     * @return mixed|string|null
-     */
     public function getDescription()
     {
         return $this->_get(self::DESCRIPTION);
     }
 
-    /**
-     * @param $ticketId
-     * @return ChangelogInterface|Changelog
-     */
+
     public function setTicketId($ticketId)
     {
         return $this->setData(self::TICKET_ID, $ticketId);
@@ -190,36 +161,23 @@ class Changelog extends \Magento\Framework\Api\AbstractSimpleObject implements C
         return $this->_get(self::CHANGE_URL);
     }
 
-    /**
-     * @return mixed|string|null
-     */
-    public function getHighlighted()
+    public function getHighlighted(): mixed
     {
         return $this->_get(self::HIGHLIGHTED);
     }
 
-    /**
-     * @param $highlighted
-     * @return ChangelogInterface|Changelog
-     */
-    public function setHighlighted($highlighted)
+    public function setHighlighted($highlighted): ChangelogInterface|Changelog
     {
         return $this->setData(self::HIGHLIGHTED, $highlighted);
     }
 
-
-    /**
-     * Set version
-     * @param string $version
-     * @return \MageSuite\Changelog\Api\Data\ChangelogInterface
-     */
-    public function setVersion($version)
+    public function setVersion($version): Changelog|ChangelogInterface
     {
         return $this->setData(self::VERSION, $version);
     }
 
-    public function getData(){
+    public function getData(): array
+    {
         return $this->_data;
     }
 }
-

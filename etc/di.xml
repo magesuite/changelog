@@ -4,7 +4,7 @@
 	<type name="Magento\Framework\Console\CommandList">
 		<arguments>
 			<argument name="commands" xsi:type="array">
-				<item name="getAllCustomerGroups" xsi:type="object">MageSuite\Changelog\Command\Test</item>
+				<item name="show_changelog" xsi:type="object">MageSuite\Changelog\Command\ShowChangelog</item>
 			</argument>
 		</arguments>
 	</type>

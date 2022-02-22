@@ -1,8 +1,5 @@
 <?php
-/**
- * Copyright ©  All rights reserved.
- * See COPYING.txt for license details.
- */
+
 declare(strict_types=1);
 
 namespace MageSuite\Changelog\Model;
@@ -39,36 +36,22 @@ class ChangelogRepository implements ChangelogRepositoryInterface
 
     protected $dataChangelogFactory;
 
+    protected $storeManager;
 
-    private $storeManager;
-
-    private $collectionProcessor;
+    protected $collectionProcessor;
 
     protected $groupChangelogByKey;
 
-    /**
-     * @param ResourceChangelog $resource
-     * @param ChangelogFactory $changelogFactory
-     * @param ChangelogInterfaceFactory $dataChangelogFactory
-     * @param ChangelogCollectionFactory $changelogCollectionFactory
-     * @param ChangelogSearchResultsInterfaceFactory $searchResultsFactory
-     * @param DataObjectHelper $dataObjectHelper
-     * @param DataObjectProcessor $dataObjectProcessor
-     * @param StoreManagerInterface $storeManager
-     * @param CollectionProcessorInterface $collectionProcessor
-     * @param JoinProcessorInterface $extensionAttributesJoinProcessor
-     * @param ExtensibleDataObjectConverter $extensibleDataObjectConverter
-     */
     public function __construct(
-        ResourceChangelog $resource,
-        ChangelogFactory $changelogFactory,
-        ChangelogInterfaceFactory $dataChangelogFactory,
-        ChangelogCollectionFactory $changelogCollectionFactory,
-        ChangelogSearchResultsInterfaceFactory $searchResultsFactory,
-        DataObjectHelper $dataObjectHelper,
-        DataObjectProcessor $dataObjectProcessor,
-        StoreManagerInterface $storeManager,
-        CollectionProcessorInterface $collectionProcessor,
+        \MageSuite\Changelog\Model\ResourceModel\Changelog $resource,
+        \MageSuite\Changelog\Model\ChangelogFactory $changelogFactory,
+        \MageSuite\Changelog\Api\Data\ChangelogInterfaceFactory $dataChangelogFactory,
+        \MageSuite\Changelog\Model\ResourceModel\Changelog\CollectionFactory $changelogCollectionFactory,
+        \MageSuite\Changelog\Api\Data\ChangelogSearchResultsInterfaceFactory $searchResultsFactory,
+        \Magento\Framework\Api\DataObjectHelper $dataObjectHelper,
+        \Magento\Framework\Reflection\DataObjectProcessor $dataObjectProcessor,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor,
         \MageSuite\Changelog\Service\GroupChangelogByKey $groupChangelogByKey
     ) {
         $this->resource = $resource;
@@ -87,10 +70,10 @@ class ChangelogRepository implements ChangelogRepositoryInterface
      * {@inheritdoc}
      */
     public function save(
-        \MageSuite\Changelog\Api\Data\ChangelogInterface $changelog
+        \MageSuite\Changelog\Api\Data\ChangelogInterface $changelogData
     ) {
         $changelogModel = $this->changelogFactory->create()->setData($changelogData);
-        
+
         try {
             $this->resource->save($changelogModel);
         } catch (\Exception $exception) {
@@ -119,15 +102,15 @@ class ChangelogRepository implements ChangelogRepositoryInterface
      * {@inheritdoc}
      */
     public function getList(
-        \Magento\Framework\Api\SearchCriteriaInterface $criteria = null
+        \Magento\Framework\Api\SearchCriteriaInterface $criteria = null,
+        $includeDeployments = true
     ) {
         $collection = $this->changelogCollectionFactory->create();
 
         $searchResults = $this->searchResultsFactory->create();
 
-        if($criteria) {
+        if ($criteria) {
             $this->collectionProcessor->process($criteria, $collection);
-
             $searchResults->setSearchCriteria($criteria);
         }
 
@@ -135,16 +118,17 @@ class ChangelogRepository implements ChangelogRepositoryInterface
         foreach ($collection as $model) {
             $items[] = $model->getDataModel();
         }
-        
+
         $searchResults->setItems($items);
         $searchResults->setTotalCount($collection->getSize());
         return $searchResults;
     }
 
-    public function getListAsNestedArray($criteria = null, $groupingKey = 'module'){
+    public function getListAsNestedArray($criteria = null, $groupingKey = 'module')
+    {
         $list = $this->getList($criteria);
         $entries = [];
-        foreach($list->getItems() as $item){
+        foreach ($list->getItems() as $item) {
             $entries[] = $item->getData();
         }
 
@@ -152,10 +136,11 @@ class ChangelogRepository implements ChangelogRepositoryInterface
         return $grouped;
     }
 
-    public function getListAsTimeline($criteria = null, $groupingKey = 'version_date'){
+    public function getListAsTimeline($criteria = null, $groupingKey = 'version_date')
+    {
         $list = $this->getList($criteria);
         $entries = [];
-        foreach($list->getItems() as $item){
+        foreach ($list->getItems() as $item) {
             $entries[] = $item->getData();
         }
 
@@ -189,4 +174,3 @@ class ChangelogRepository implements ChangelogRepositoryInterface
         return $this->delete($this->get($changelogId));
     }
 }
-

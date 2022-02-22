@@ -7,6 +7,7 @@ declare(strict_types=1);
 
 namespace MageSuite\Changelog\Model;
 
+use Magento\InventoryApi\Api\Data\StockSourceLinkInterface;
 use MageSuite\Changelog\Api\Data\DeploymentInterfaceFactory;
 use MageSuite\Changelog\Api\Data\DeploymentSearchResultsInterfaceFactory;
 use MageSuite\Changelog\Api\DeploymentRepositoryInterface;
@@ -25,7 +26,7 @@ use Magento\Store\Model\StoreManagerInterface;
 class DeploymentRepository implements DeploymentRepositoryInterface
 {
 
-    protected $resource;
+    protected $resourceDeployment;
 
     protected $deploymentFactory;
 
@@ -41,39 +42,32 @@ class DeploymentRepository implements DeploymentRepositoryInterface
 
     protected $extensionAttributesJoinProcessor;
 
-    private $storeManager;
+    protected $searchCriteriaBuilder;
 
-    private $collectionProcessor;
+    protected $sortBuilder;
+
+    protected $storeManager;
+
+    protected $collectionProcessor;
 
     protected $extensibleDataObjectConverter;
 
-    /**
-     * @param ResourceDeployment $resource
-     * @param DeploymentFactory $deploymentFactory
-     * @param DeploymentInterfaceFactory $dataDeploymentFactory
-     * @param DeploymentCollectionFactory $deploymentCollectionFactory
-     * @param DeploymentSearchResultsInterfaceFactory $searchResultsFactory
-     * @param DataObjectHelper $dataObjectHelper
-     * @param DataObjectProcessor $dataObjectProcessor
-     * @param StoreManagerInterface $storeManager
-     * @param CollectionProcessorInterface $collectionProcessor
-     * @param JoinProcessorInterface $extensionAttributesJoinProcessor
-     * @param ExtensibleDataObjectConverter $extensibleDataObjectConverter
-     */
     public function __construct(
-        ResourceDeployment $resource,
-        DeploymentFactory $deploymentFactory,
-        DeploymentInterfaceFactory $dataDeploymentFactory,
-        DeploymentCollectionFactory $deploymentCollectionFactory,
-        DeploymentSearchResultsInterfaceFactory $searchResultsFactory,
-        DataObjectHelper $dataObjectHelper,
-        DataObjectProcessor $dataObjectProcessor,
-        StoreManagerInterface $storeManager,
-        CollectionProcessorInterface $collectionProcessor,
-        JoinProcessorInterface $extensionAttributesJoinProcessor,
-        ExtensibleDataObjectConverter $extensibleDataObjectConverter
+        \MageSuite\Changelog\Model\ResourceModel\Deployment $resourceDeployment,
+        \MageSuite\Changelog\Model\DeploymentFactory $deploymentFactory,
+        \MageSuite\Changelog\Api\Data\DeploymentInterfaceFactory $dataDeploymentFactory,
+        \MageSuite\Changelog\Model\ResourceModel\Deployment\CollectionFactory $deploymentCollectionFactory,
+        \MageSuite\Changelog\Api\Data\DeploymentSearchResultsInterfaceFactory $searchResultsFactory,
+        \Magento\Framework\Api\DataObjectHelper $dataObjectHelper,
+        \Magento\Framework\Reflection\DataObjectProcessor $dataObjectProcessor,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor,
+        \Magento\Framework\Api\ExtensionAttribute\JoinProcessorInterface $extensionAttributesJoinProcessor,
+        \Magento\Framework\Api\ExtensibleDataObjectConverter $extensibleDataObjectConverter,
+        \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder,
+        \Magento\Framework\Api\SortOrderBuilder $sortBuilder
     ) {
-        $this->resource = $resource;
+        $this->resourceDeployment = $resourceDeployment;
         $this->deploymentFactory = $deploymentFactory;
         $this->deploymentCollectionFactory = $deploymentCollectionFactory;
         $this->searchResultsFactory = $searchResultsFactory;
@@ -84,6 +78,8 @@ class DeploymentRepository implements DeploymentRepositoryInterface
         $this->collectionProcessor = $collectionProcessor;
         $this->extensionAttributesJoinProcessor = $extensionAttributesJoinProcessor;
         $this->extensibleDataObjectConverter = $extensibleDataObjectConverter;
+        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
+        $this->sortBuilder = $sortBuilder;
     }
 
     /**
@@ -92,21 +88,17 @@ class DeploymentRepository implements DeploymentRepositoryInterface
     public function save(
         \MageSuite\Changelog\Api\Data\DeploymentInterface $deployment
     ) {
-        /* if (empty($deployment->getStoreId())) {
-            $storeId = $this->storeManager->getStore()->getId();
-            $deployment->setStoreId($storeId);
-        } */
-        
+
         $deploymentData = $this->extensibleDataObjectConverter->toNestedArray(
             $deployment,
             [],
             \MageSuite\Changelog\Api\Data\DeploymentInterface::class
         );
-        
+
         $deploymentModel = $this->deploymentFactory->create()->setData($deploymentData);
-        
+
         try {
-            $this->resource->save($deploymentModel);
+            $this->resourceDeployment->save($deploymentModel);
         } catch (\Exception $exception) {
             throw new CouldNotSaveException(__(
                 'Could not save the deployment: %1',
@@ -122,36 +114,34 @@ class DeploymentRepository implements DeploymentRepositoryInterface
     public function get($deploymentId)
     {
         $deployment = $this->deploymentFactory->create();
-        $this->resource->load($deployment, $deploymentId);
+        $this->resourceDeployment->load($deployment, $deploymentId);
         if (!$deployment->getId()) {
             throw new NoSuchEntityException(__('Deployment with id "%1" does not exist.', $deploymentId));
         }
         return $deployment->getDataModel();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getList(
-        \Magento\Framework\Api\SearchCriteriaInterface $criteria
+        \Magento\Framework\Api\SearchCriteriaInterface $criteria = null
     ) {
+        $searchResults = $this->searchResultsFactory->create();
         $collection = $this->deploymentCollectionFactory->create();
-        
+
         $this->extensionAttributesJoinProcessor->process(
             $collection,
             \MageSuite\Changelog\Api\Data\DeploymentInterface::class
         );
-        
-        $this->collectionProcessor->process($criteria, $collection);
-        
-        $searchResults = $this->searchResultsFactory->create();
-        $searchResults->setSearchCriteria($criteria);
-        
+
+        if ($criteria) {
+            $this->collectionProcessor->process($criteria, $collection);
+            $searchResults->setSearchCriteria($criteria);
+        }
+
         $items = [];
         foreach ($collection as $model) {
             $items[] = $model->getDataModel();
         }
-        
+
         $searchResults->setItems($items);
         $searchResults->setTotalCount($collection->getSize());
         return $searchResults;
@@ -165,8 +155,8 @@ class DeploymentRepository implements DeploymentRepositoryInterface
     ) {
         try {
             $deploymentModel = $this->deploymentFactory->create();
-            $this->resource->load($deploymentModel, $deployment->getDeploymentId());
-            $this->resource->delete($deploymentModel);
+            $this->resourceDeployment->load($deploymentModel, $deployment->getDeploymentId());
+            $this->resourceDeployment->delete($deploymentModel);
         } catch (\Exception $exception) {
             throw new CouldNotDeleteException(__(
                 'Could not delete the Deployment: %1',
@@ -179,9 +169,25 @@ class DeploymentRepository implements DeploymentRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function deleteById($deploymentId)
+    public function deleteById($deploymentId): bool
     {
         return $this->delete($this->get($deploymentId));
     }
-}
 
+    public function getLastDeployment()
+    {
+
+        $sortOrder = $this->sortBuilder
+            ->setField('deployed_at')
+            ->setDescendingDirection()
+            ->create();
+
+        $searchCriteria = $this->searchCriteriaBuilder
+            ->addSortOrder($sortOrder)
+            ->setPageSize(1)
+            ->create();
+
+        $deploymentsList = $this->getList($searchCriteria);
+        return $deploymentsList->getItems()[0];
+    }
+}
