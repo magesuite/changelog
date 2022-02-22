@@ -4,22 +4,7 @@ declare(strict_types=1);
 
 namespace MageSuite\Changelog\Model;
 
-use MageSuite\Changelog\Api\ChangelogRepositoryInterface;
-use MageSuite\Changelog\Api\Data\ChangelogInterfaceFactory;
-use MageSuite\Changelog\Api\Data\ChangelogSearchResultsInterfaceFactory;
-use MageSuite\Changelog\Model\ResourceModel\Changelog as ResourceChangelog;
-use MageSuite\Changelog\Model\ResourceModel\Changelog\CollectionFactory as ChangelogCollectionFactory;
-use Magento\Framework\Api\DataObjectHelper;
-use Magento\Framework\Api\ExtensibleDataObjectConverter;
-use Magento\Framework\Api\ExtensionAttribute\JoinProcessorInterface;
-use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
-use Magento\Framework\Exception\CouldNotDeleteException;
-use Magento\Framework\Exception\CouldNotSaveException;
-use Magento\Framework\Exception\NoSuchEntityException;
-use Magento\Framework\Reflection\DataObjectProcessor;
-use Magento\Store\Model\StoreManagerInterface;
-
-class ChangelogRepository implements ChangelogRepositoryInterface
+class ChangelogRepository implements \MageSuite\Changelog\Api\ChangelogRepositoryInterface
 {
 
     protected $resource;
@@ -102,8 +87,7 @@ class ChangelogRepository implements ChangelogRepositoryInterface
      * {@inheritdoc}
      */
     public function getList(
-        \Magento\Framework\Api\SearchCriteriaInterface $criteria = null,
-        $includeDeployments = true
+        \Magento\Framework\Api\SearchCriteriaInterface $criteria = null
     ) {
         $collection = $this->changelogCollectionFactory->create();
 
