@@ -1,29 +1,11 @@
 <?php
-/**
- * Copyright ©  All rights reserved.
- * See COPYING.txt for license details.
- */
+
 declare(strict_types=1);
 
 namespace MageSuite\Changelog\Model;
 
-use Magento\InventoryApi\Api\Data\StockSourceLinkInterface;
-use MageSuite\Changelog\Api\Data\DeploymentInterfaceFactory;
-use MageSuite\Changelog\Api\Data\DeploymentSearchResultsInterfaceFactory;
-use MageSuite\Changelog\Api\DeploymentRepositoryInterface;
-use MageSuite\Changelog\Model\ResourceModel\Deployment as ResourceDeployment;
-use MageSuite\Changelog\Model\ResourceModel\Deployment\CollectionFactory as DeploymentCollectionFactory;
-use Magento\Framework\Api\DataObjectHelper;
-use Magento\Framework\Api\ExtensibleDataObjectConverter;
-use Magento\Framework\Api\ExtensionAttribute\JoinProcessorInterface;
-use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
-use Magento\Framework\Exception\CouldNotDeleteException;
-use Magento\Framework\Exception\CouldNotSaveException;
-use Magento\Framework\Exception\NoSuchEntityException;
-use Magento\Framework\Reflection\DataObjectProcessor;
-use Magento\Store\Model\StoreManagerInterface;
 
-class DeploymentRepository implements DeploymentRepositoryInterface
+class DeploymentRepository implements \MageSuite\Changelog\Api\DeploymentRepositoryInterface
 {
 
     protected $resourceDeployment;
