@@ -11,7 +11,7 @@ interface ChangelogSearchResultsInterface extends \Magento\Framework\Api\SearchR
      * Get Changelog list.
      * @return \MageSuite\Changelog\Api\Data\ChangelogInterface[]
      */
-    public function getItems();
+    public function getItems(): array;
 
     /**
      * Set version list.
@@ -20,4 +20,3 @@ interface ChangelogSearchResultsInterface extends \Magento\Framework\Api\SearchR
      */
     public function setItems(array $items);
 }
-

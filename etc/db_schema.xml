@@ -3,16 +3,16 @@
 	<table name="changelog_entity" resource="default" engine="innodb" comment="Changelog Table">
 		<column name="changelog_id" xsi:type="bigint" padding="6" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
 		<column name="module" nullable="true" xsi:type="varchar" comment="Module Id" length="255"/>
-		<column name="version" nullable="true" xsi:type="varchar" comment="version" length="16"/>
+		<column name="version" nullable="true" xsi:type="varchar" comment="Version" length="16"/>
 		<column name="description" nullable="true" xsi:type="text" comment="Description"/>
 		<column name="url" nullable="true" xsi:type="varchar" length="255" comment="Url"/>
-		<column name="ticket_id" nullable="true" xsi:type="varchar" length="32" comment="Description"/>
+		<column name="ticket_id" nullable="true" xsi:type="varchar" length="32" comment="Ticket ID"/>
 		<column name="version_date" nullable="true" xsi:type="date" comment="Date of change"/>
 		<column name="change_type" nullable="true" xsi:type="varchar" comment="Type of change" length="32"/>
 		<column name="change_overview" nullable="true" xsi:type="text" comment="Overview of change" />
 		<column name="change_description" nullable="true" xsi:type="text" comment="Long description of change" />
-		<column name="change_url" nullable="true" xsi:type="varchar" length="255" comment="Url to change descrption" />
-		<column name="highlighted" nullable="true" xsi:type="smallint" comment="Url to change descrption" />
+		<column name="change_url" nullable="true" xsi:type="varchar" length="255" comment="Url to change description" />
+		<column name="highlighted" nullable="true" xsi:type="smallint" comment="Highlight flag" />
 
 		<constraint xsi:type="primary" referenceId="PRIMARY">
 			<column name="changelog_id"/>

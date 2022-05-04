@@ -1,42 +1,49 @@
 <?xml version="1.0" ?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
 
-	<type name="Magento\Framework\Console\CommandList">
-		<arguments>
-			<argument name="commands" xsi:type="array">
-				<item name="show_changelog" xsi:type="object">MageSuite\Changelog\Command\ShowChangelog</item>
-			</argument>
-		</arguments>
-	</type>
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="show_changelog" xsi:type="object">MageSuite\Changelog\Command\ShowChangelog</item>
+            </argument>
+        </arguments>
+    </type>
 
-	<preference for="MageSuite\Changelog\Api\ChangelogRepositoryInterface" type="MageSuite\Changelog\Model\ChangelogRepository"/>
-	<preference for="MageSuite\Changelog\Api\Data\ChangelogInterface" type="MageSuite\Changelog\Model\Data\Changelog"/>
-	<preference for="MageSuite\Changelog\Api\Data\ChangelogSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
-	<preference for="MageSuite\Changelog\Api\DeploymentRepositoryInterface" type="MageSuite\Changelog\Model\DeploymentRepository"/>
-	<preference for="MageSuite\Changelog\Api\Data\DeploymentInterface" type="MageSuite\Changelog\Model\Data\Deployment"/>
-	<preference for="MageSuite\Changelog\Api\Data\DeploymentSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+    <preference for="MageSuite\Changelog\Api\ChangelogRepositoryInterface"
+                type="MageSuite\Changelog\Model\ChangelogRepository"/>
+    <preference for="MageSuite\Changelog\Api\Data\ChangelogInterface" type="MageSuite\Changelog\Model\Data\Changelog"/>
+    <preference for="MageSuite\Changelog\Api\Data\ChangelogSearchResultsInterface"
+                type="Magento\Framework\Api\SearchResults"/>
+    <preference for="MageSuite\Changelog\Api\DeploymentRepositoryInterface"
+                type="MageSuite\Changelog\Model\DeploymentRepository"/>
+    <preference for="MageSuite\Changelog\Api\Data\DeploymentInterface"
+                type="MageSuite\Changelog\Model\Data\Deployment"/>
+    <preference for="MageSuite\Changelog\Api\Data\DeploymentSearchResultsInterface"
+                type="Magento\Framework\Api\SearchResults"/>
 
-	<type name="MageSuite\Changelog\Config\Changelog\Reader">
-		<arguments>
-			<argument name="converter" xsi:type="object">MageSuite\Changelog\Config\Changelog\Converter</argument>
-			<argument name="schemaLocator" xsi:type="object">MageSuite\Changelog\Config\Changelog\SchemaLocator</argument>
-			<argument name="fileName" xsi:type="string">changelog.xml</argument>
-			<argument name="idAttributes" xsi:type="array">
-				<item name="/config/module" xsi:type="string">name</item>
-			</argument>
-		</arguments>
-	</type>
+    <type name="MageSuite\Changelog\Config\Changelog\Reader">
+        <arguments>
+            <argument name="converter" xsi:type="object">MageSuite\Changelog\Config\Changelog\Converter</argument>
+            <argument name="schemaLocator" xsi:type="object">MageSuite\Changelog\Config\Changelog\SchemaLocator
+            </argument>
+            <argument name="fileName" xsi:type="string">changelog.xml</argument>
+            <argument name="idAttributes" xsi:type="array">
+                <item name="/config/module" xsi:type="string">name</item>
+            </argument>
+        </arguments>
+    </type>
 
-	<virtualType name="changelogDataStorage" type="Magento\Framework\Config\Data">
-		<arguments>
-			<argument name="reader" xsi:type="object">MageSuite\Changelog\Config\Changelog\Reader</argument>
-			<argument name="cacheId" xsi:type="string">magesuite_changelog</argument>
-		</arguments>
-	</virtualType>
+    <virtualType name="changelogDataStorage" type="Magento\Framework\Config\Data">
+        <arguments>
+            <argument name="reader" xsi:type="object">MageSuite\Changelog\Config\Changelog\Reader</argument>
+            <argument name="cacheId" xsi:type="string">magesuite_changelog</argument>
+        </arguments>
+    </virtualType>
 
-	<type name="MageSuite\Changelog\Config\Changelog\Data">
-		<arguments>
-			<argument name="dataStorage" xsi:type="object">changelogDataStorage</argument>
-		</arguments>
-	</type>
+    <type name="MageSuite\Changelog\Config\Changelog\Data">
+        <arguments>
+            <argument name="dataStorage" xsi:type="object">changelogDataStorage</argument>
+        </arguments>
+    </type>
 </config>

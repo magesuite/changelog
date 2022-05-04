@@ -2,18 +2,19 @@
 
 namespace MageSuite\Changelog\Block\Adminhtml\Dashboard;
 
-class Changelog extends \Magento\Backend\Block\Template{
+class Changelog extends \Magento\Backend\Block\Template
+{
 
-    protected $configuration;
+    protected \MageSuite\Changelog\Helper\Configuration $configuration;
 
-    protected $getLastDeploymentDate;
+    protected \MageSuite\Changelog\Service\Deployment\GetLastDeploymentDate $getLastDeploymentDate;
 
     public function __construct(
         \MageSuite\Changelog\Helper\Configuration $configuration,
         \Magento\Backend\Block\Template\Context $context,
         \MageSuite\Changelog\Service\Deployment\GetLastDeploymentDate $getLastDeploymentDate,
-        array $data = [])
-    {
+        array $data = []
+    ) {
         $this->configuration = $configuration;
         $this->getLastDeploymentDate = $getLastDeploymentDate;
         $this->_template = 'MageSuite_Changelog::dashboard/changelog.phtml';
@@ -21,11 +22,13 @@ class Changelog extends \Magento\Backend\Block\Template{
     }
 
 
-    public function getConfiguration($key){
-      return $this->configuration->getConfigurationForKey($key);
+    public function getTrackerUrl()
+    {
+        return $this->configuration->getTrackerUrl();
     }
 
-    public function getDateOfLastDeployment(){
+    public function getDateOfLastDeployment(): ?string
+    {
         return $this->getLastDeploymentDate->execute();
     }
 }

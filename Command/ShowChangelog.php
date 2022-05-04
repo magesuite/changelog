@@ -2,14 +2,10 @@
 
 namespace MageSuite\Changelog\Command;
 
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-
-class ShowChangelog extends Command
+class ShowChangelog extends \Symfony\Component\Console\Command\Command
 {
 
-    private $dataConfigFactory;
+    protected $dataConfigFactory;
 
     protected $flattenChangelogFactory;
 
@@ -37,7 +33,7 @@ class ShowChangelog extends Command
         $this->setDescription('Lists all changelog entries as flat list.');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(\Symfony\Component\Console\Input\InputInterface $input, \Symfony\Component\Console\Output\OutputInterface $output)
     {
         $dataConfig = $this->dataConfigFactory->create();
         $flattenChangelog = $this->flattenChangelogFactory->create();

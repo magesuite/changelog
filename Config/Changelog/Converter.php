@@ -17,59 +17,75 @@ class Converter implements \Magento\Framework\Config\ConverterInterface
     {
         $output = [];
         $xpath = new \DOMXPath($source);
-        $nodes = $xpath->evaluate('/config/module');
+        $moduleNodes = $xpath->evaluate('/config/module');
 
         /** @var $node \DOMNode */
-        foreach ($nodes as $node) {
-            $nodeId = $node->getAttribute('id');
+        foreach ($moduleNodes as $moduleNode) {
+            $nodeId = $moduleNode->getAttribute('id');
 
             $data = [];
             $data['id'] = $nodeId;
-            $data['description'] = $node->getAttribute('description');
-            $data['url'] = $node->getAttribute('url');
+            $data['description'] = $moduleNode->getAttribute('description');
+            $data['url'] = $moduleNode->getAttribute('url');
 
             $data['tags'] = [];
 
-            foreach ($node->childNodes as $childNode) {
-                if ($childNode->nodeType != XML_ELEMENT_NODE) {
+            foreach ($moduleNode->childNodes as $changelogNode) {
+                if ($changelogNode->nodeType != XML_ELEMENT_NODE) {
                     continue;
                 }
 
-                foreach($childNode->childNodes as $tagNode){
-                    if ($tagNode->nodeType != XML_ELEMENT_NODE) {
-                        continue;
-                    }
-                    $tag = [];
-                    $tag['version'] = $tagNode->getAttribute('version');
-                    $tag['date'] = $tagNode->getAttribute('date');
-
-                    $changes = [];
-                    foreach($tagNode->childNodes as $changeNode){
-
-                        if ($changeNode->nodeType != XML_ELEMENT_NODE) {
-                            continue;
-                        }
-
-                        foreach($changeNode->childNodes as $changeDetails){
-                            if ($changeDetails->nodeType != XML_ELEMENT_NODE) {
-                                continue;
-                            }
-
-                            $changes[$changeDetails->nodeName] = $changeDetails->nodeValue;
-                        }
-
-                        $tag['changes'][] = $changes;
-                        $changes = [];
-                    }
-
-                    $data['tags'][] = $tag;
-                }
+                $output['module'][$nodeId] = $data;
+                $this->processTagNodes($changelogNode->childNodes, $output['module'][$nodeId]);
             }
 
-            $output['module'][$nodeId] = $data;
+            return $output;
+        }
+    }
+
+
+    private function processTagNodes($tagNodes, &$output)
+    {
+        foreach ($tagNodes as $tagNode) {
+            if ($tagNode->nodeType != XML_ELEMENT_NODE) {
+                continue;
+            }
+
+            $tagChanges = $this->processChangeNodes($tagNode->childNodes, $output);
+            $tag['version'] = $tagNode->getAttribute('version');
+            $tag['date'] = $tagNode->getAttribute('date');
+            $tag['changes'] = $tagChanges;
+            $output['tags'][] = $tag;
+        }
+    }
+
+    private function processChangeNodes($changeNodes, &$output)
+    {
+        $changes = [];
+        foreach ($changeNodes as $changeNode) {
+
+            if ($changeNode->nodeType != XML_ELEMENT_NODE) {
+                continue;
+            }
+
+            $changes[] = $this->processChangeDetailNodes($changeNode->childNodes, $output);
+
         }
 
-        return $output;
+        return $changes;
+    }
+
+    private function processChangeDetailNodes($changeDetailNodes, &$output)
+    {
+        $changes = [];
+        foreach ($changeDetailNodes as $changeDetails) {
+            if ($changeDetails->nodeType != XML_ELEMENT_NODE) {
+                continue;
+            }
+
+            $changes[$changeDetails->nodeName] = $changeDetails->nodeValue;
+        }
+
+        return $changes;
     }
 }
-

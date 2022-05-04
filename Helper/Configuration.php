@@ -16,9 +16,4 @@ class Configuration extends \Magento\Framework\App\Helper\AbstractHelper
     {
         return $this->scopeConfig->getValue(self::XML_PATH_TRACKER_URL);
     }
-
-    public function getConfigurationForKey($key)
-    {
-        return $this->scopeConfig->getValue('changelog/general/'.$key);
-    }
 }

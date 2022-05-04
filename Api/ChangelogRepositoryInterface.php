@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace MageSuite\Changelog\Api;
 
-use Magento\Framework\Api\SearchCriteriaInterface;
-
 interface ChangelogRepositoryInterface
 {
 
     /**
-     * Save Changelog
      * @param \MageSuite\Changelog\Api\Data\ChangelogInterface $changelog
      * @return \MageSuite\Changelog\Api\Data\ChangelogInterface
      * @throws \Magento\Framework\Exception\LocalizedException
@@ -20,7 +17,6 @@ interface ChangelogRepositoryInterface
     );
 
     /**
-     * Retrieve Changelog
      * @param string $changelogId
      * @return \MageSuite\Changelog\Api\Data\ChangelogInterface
      * @throws \Magento\Framework\Exception\LocalizedException
@@ -28,7 +24,6 @@ interface ChangelogRepositoryInterface
     public function get($changelogId);
 
     /**
-     * Retrieve Changelog matching the specified criteria.
      * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
      * @return \MageSuite\Changelog\Api\Data\ChangelogSearchResultsInterface
      * @throws \Magento\Framework\Exception\LocalizedException
@@ -38,7 +33,6 @@ interface ChangelogRepositoryInterface
     );
 
     /**
-     * Delete Changelog
      * @param \MageSuite\Changelog\Api\Data\ChangelogInterface $changelog
      * @return bool true on success
      * @throws \Magento\Framework\Exception\LocalizedException
@@ -48,7 +42,6 @@ interface ChangelogRepositoryInterface
     );
 
     /**
-     * Delete Changelog by ID
      * @param string $changelogId
      * @return bool true on success
      * @throws \Magento\Framework\Exception\NoSuchEntityException
@@ -56,4 +49,3 @@ interface ChangelogRepositoryInterface
      */
     public function deleteById($changelogId);
 }
-

@@ -4,9 +4,14 @@ namespace MageSuite\Changelog\Test\Integration\Service;
 
 class CreateDeploymentMarkerTest extends \PHPUnit\Framework\TestCase
 {
+    /**
+     * @var \Magento\Framework\App\ObjectManager
+     */
+    private $objectManager;
 
-    private \Magento\TestFramework\ObjectManager|\Magento\Framework\App\ObjectManager $objectManager;
-
+    /**
+     * @var mixed
+     */
     private $createDeploymentMarker;
 
     public function setUp(): void
@@ -14,7 +19,6 @@ class CreateDeploymentMarkerTest extends \PHPUnit\Framework\TestCase
         $this->objectManager = \Magento\TestFramework\ObjectManager::getInstance();
         $this->createDeploymentMarker = $this->objectManager->get(\MageSuite\Changelog\Service\Deployment\CreateDeploymentMarker::class);
     }
-
 
     public function testItCreatesNewDeploymentMarkerCorrectly()
     {

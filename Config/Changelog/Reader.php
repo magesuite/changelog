@@ -18,7 +18,7 @@ class Reader extends \Magento\Framework\Config\Reader\Filesystem
         \Magento\Framework\Config\ValidationStateInterface $validationState,
         $fileName = 'changelog.xml',
         $idAttributes = [],
-        $domDocumentClass = 'Magento\Framework\Config\Dom',
+        $domDocumentClass = \Magento\Framework\Config\Dom::class,
         $defaultScope = 'primary'
     ) {
         parent::__construct(
@@ -33,4 +33,3 @@ class Reader extends \Magento\Framework\Config\Reader\Filesystem
         );
     }
 }
-

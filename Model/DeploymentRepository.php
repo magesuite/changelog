@@ -4,35 +4,22 @@ declare(strict_types=1);
 
 namespace MageSuite\Changelog\Model;
 
-
 class DeploymentRepository implements \MageSuite\Changelog\Api\DeploymentRepositoryInterface
 {
 
-    protected $resourceDeployment;
-
-    protected $deploymentFactory;
-
-    protected $deploymentCollectionFactory;
-
-    protected $searchResultsFactory;
-
-    protected $dataObjectHelper;
-
-    protected $dataObjectProcessor;
-
-    protected $dataDeploymentFactory;
-
-    protected $extensionAttributesJoinProcessor;
-
-    protected $searchCriteriaBuilder;
-
-    protected $sortBuilder;
-
-    protected $storeManager;
-
-    protected $collectionProcessor;
-
-    protected $extensibleDataObjectConverter;
+    protected ResourceModel\Deployment $resourceDeployment;
+    protected DeploymentFactory $deploymentFactory;
+    protected ResourceModel\Deployment\CollectionFactory $deploymentCollectionFactory;
+    protected \MageSuite\Changelog\Api\Data\DeploymentSearchResultsInterfaceFactory $searchResultsFactory;
+    protected \Magento\Framework\Api\DataObjectHelper $dataObjectHelper;
+    protected \Magento\Framework\Reflection\DataObjectProcessor $dataObjectProcessor;
+    protected \MageSuite\Changelog\Api\Data\DeploymentInterfaceFactory $dataDeploymentFactory;
+    protected \Magento\Framework\Api\ExtensionAttribute\JoinProcessorInterface $extensionAttributesJoinProcessor;
+    protected \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder;
+    protected \Magento\Framework\Api\SortOrderBuilder $sortBuilder;
+    protected \Magento\Store\Model\StoreManagerInterface $storeManager;
+    protected \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor;
+    protected \Magento\Framework\Api\ExtensibleDataObjectConverter $extensibleDataObjectConverter;
 
     public function __construct(
         \MageSuite\Changelog\Model\ResourceModel\Deployment $resourceDeployment,
@@ -170,6 +157,9 @@ class DeploymentRepository implements \MageSuite\Changelog\Api\DeploymentReposit
             ->create();
 
         $deploymentsList = $this->getList($searchCriteria);
+        if ($deploymentsList->getTotalCount()==0) {
+            return $this->deploymentFactory->create();
+        }
         return $deploymentsList->getItems()[0];
     }
 }

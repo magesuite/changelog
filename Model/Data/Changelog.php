@@ -166,12 +166,12 @@ class Changelog extends \Magento\Framework\Api\AbstractSimpleObject implements C
         return $this->_get(self::HIGHLIGHTED);
     }
 
-    public function setHighlighted($highlighted): ChangelogInterface|Changelog
+    public function setHighlighted($highlighted)
     {
         return $this->setData(self::HIGHLIGHTED, $highlighted);
     }
 
-    public function setVersion($version): Changelog|ChangelogInterface
+    public function setVersion($version)
     {
         return $this->setData(self::VERSION, $version);
     }

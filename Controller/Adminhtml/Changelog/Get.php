@@ -33,7 +33,7 @@ class Get extends \Magento\Framework\App\Action\Action
 
         $mode = $this->getRequest()->getParam('mode');
         $params = $this->parseParams();
-        $filters = $this->getFilters($params['from'], $params['to']);
+        $filters = $this->buildFilters($params['from'], $params['to']);
 
         $searchCriteria = $this->searchCriteriaBuilder
             ->addFilter($filters['from'])
@@ -49,7 +49,7 @@ class Get extends \Magento\Framework\App\Action\Action
         return $result;
     }
 
-    private function getFilters($from, $to): array
+    private function buildFilters($from, $to): array
     {
         $filters = [];
         $filters['from'] = $this->filterBuilder->setField('version_date')

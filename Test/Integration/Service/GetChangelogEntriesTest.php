@@ -10,26 +10,24 @@ class GetChangelogEntriesTest extends \PHPUnit\Framework\TestCase
     private $objectManager;
 
     /**
-     * @var \MageSuite\Changelog\Service\ProcessChangelog
+     * @var \MageSuite\Changelog\Service\GetChangelogEntries
      */
-    private $processChangelog;
-
     private $getChangelogEntries;
 
 
     public function setUp(): void
     {
         $this->objectManager = \Magento\TestFramework\ObjectManager::getInstance();
-        $this->processChangelog = $this->objectManager->get(\MageSuite\Changelog\Service\ProcessChangelog::class);
+        $this->addChangelogEntriesToDatabaselog = $this->objectManager->get(\MageSuite\Changelog\Service\AddChangelogEntriesToDatabase::class);
         $this->getChangelogEntries = $this->objectManager->get(\MageSuite\Changelog\Service\GetChangelogEntries::class);
     }
 
 
     public function testItGetsChangelogDataInGroupedModeCorrectly()
     {
-       $entries = $this->getChangelogEntries->execute(null, 'grouped');
-       $this->assertIsArray($entries);
-       $this->assertArrayHasKey('MageSuite_Changelog', $entries);
+        $entries = $this->getChangelogEntries->execute(null, 'grouped');
+        $this->assertIsArray($entries);
+        $this->assertArrayHasKey('MageSuite_Changelog', $entries);
     }
 
     public function testItGetsChangelogDataInTimelineModeCorrectly()
@@ -38,5 +36,4 @@ class GetChangelogEntriesTest extends \PHPUnit\Framework\TestCase
         $this->assertIsArray($entries);
         $this->assertEquals('MageSuite_Changelog', $entries[0]['module']);
     }
-
 }

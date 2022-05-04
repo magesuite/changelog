@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace MageSuite\Changelog\Api;
 
-use Magento\Framework\Api\SearchCriteriaInterface;
-
 interface DeploymentRepositoryInterface
 {
 
@@ -56,4 +54,3 @@ interface DeploymentRepositoryInterface
      */
     public function deleteById($deploymentId);
 }
-

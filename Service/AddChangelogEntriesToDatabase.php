@@ -2,7 +2,7 @@
 
 namespace MageSuite\Changelog\Service;
 
-class ProcessChangelog
+class AddChangelogEntriesToDatabase
 {
 
     protected $data;

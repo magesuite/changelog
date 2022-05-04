@@ -10,22 +10,21 @@ class ProcessChangelogTest extends \PHPUnit\Framework\TestCase
     private $objectManager;
 
     /**
-     * @var \MageSuite\Changelog\Service\ProcessChangelog
+     * @var \MageSuite\Changelog\Model\ChangelogRepository
      */
-    private $processChangelog;
-
     private $changelogRepository;
 
+    /**
+     * @var \MageSuite\Changelog\Model\DeploymentRepository
+     */
     private $deploymentRepository;
 
     public function setUp(): void
     {
         $this->objectManager = \Magento\TestFramework\ObjectManager::getInstance();
-        $this->processChangelog = $this->objectManager->get(\MageSuite\Changelog\Service\ProcessChangelog::class);
         $this->changelogRepository = $this->objectManager->get(\MageSuite\Changelog\Model\ChangelogRepository::class);
         $this->deploymentRepository = $this->objectManager->get(\MageSuite\Changelog\Model\DeploymentRepository::class);
     }
-
 
     public function testItGeneratedChangelogEntitesUponInstallation()
     {

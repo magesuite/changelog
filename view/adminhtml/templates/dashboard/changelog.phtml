@@ -1,7 +1,3 @@
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;200;400;700&display=swap');
-</style>
-
 <div class="clearfix">
     <div class="filters-wrapper">
         <div class="display-mode filters">
@@ -50,139 +46,7 @@
 </div>
 
 <style type="text/css">
-    .filters-wrapper{
-        display: flex;
-        border-bottom: 1px solid #e3e3e3;
-        padding-bottom:12px;
-    }
-    li.padded{
-        margin-right: 10px;
-    }
-    ul.filters {
-        list-style: none;
-        margin-bottom: 0;
-        width: 100%;
-        flex: 1;
-    }
 
-    ul.filters li {
-        float:left;
-        margin-right: 5px;
-    }
-
-    ul.right{
-        flex: 3;
-        display: flex;
-        justify-content: flex-end;
-    }
-
-    .clearfix:after {
-        content:"";
-        display:block;
-        clear:both;
-    }
-
-    .display-mode{
-        display:flex;
-        padding-left: 10px;
-        align-items: flex-end;
-    }
-
-    .display-mode-label{
-        font-weight: bold;
-        margin-right: 20px;
-    }
-
-    #from-picker {
-        width: 17rem!important;
-    }
-
-    #to-picker {
-        width: 17rem!important;
-    }
-
-
-    .changelog-module{
-
-        margin:1rem 0rem 1rem 0rem;
-        background-color: #FAFAFA;
-        font-weight: bold;
-        clear: both;
-        border-bottom:2px solid #EAEAEA;
-    }
-
-    .changelog-module .module-header {
-        padding: 1rem;
-        background-color: #EAEAEA;
-    }
-    .changelog-module .module-content{
-        padding: 1rem;
-    }
-    .changelog-version{
-        padding-left: 3rem;
-        font-weight: normal;
-    }
-
-    .changelog-change{
-        padding-left: 8rem;
-        font-weight: normal;
-        font-family: 'Roboto Mono', monospace;
-        font-size: 12px;
-    }
-
-    span.ticket, span.see-more{
-        font-size: 10px;
-        margin-top: 0px;
-        margin-left: 10px;
-        color: white;
-        /* border: 1px solid blue; */
-        background-color: #858ac3;
-        padding: 1px 4px 1px 4px;
-    }
-
-    span.see-more{
-        background-color: #85c395;
-    }
-
-    span.module-info{
-        display: block;
-        float: right;
-        border: 1px solid #bfbfbf;
-        padding: 1px 6px 1px 6px;
-        background: white;
-        cursor: pointer;
-    }
-
-    span.module-description{
-        font-weight: normal;
-        display: block;
-        font-size: 14px;
-        padding-top: 5px;
-    }
-
-    span.version-wrapper{
-        padding: 0px 5px;
-        border: solid 1px #afadad;
-        background: white;
-        margin-right: 12px;
-        font-size: 12px;
-        font-weight: bold;
-    }
-
-    .timeline{
-        min-height: 32px;
-        padding-top: 8px;
-        margin-bottom: 2px;
-        font-weight: normal;
-        margin-top: 1px;
-        padding-left: 8px;
-    }
-
-    .deployment{
-        background: #dbe6db;
-        border-bottom: 2px solid #b3bdb3;
-        text-align: center;
-    }
 </style>
 
 <script type="text/x-magento-init">
@@ -190,7 +54,7 @@
             "*": {
                 "changelog": {
                     "baseChangelogUrl": "<?php echo $block->escapeJsQuote($block->getUrl('adminhtml/changelog/get', ['_current' => true]));?>",
-                    "trackerUrl" : "<?php echo $block->escapeJsQuote($block->getConfiguration('tracker_url'));?>",
+                    "trackerUrl" : "<?php echo $block->escapeJsQuote($block->getTrackerUrl());?>",
                     "lastDeploymentDate" : "<?php echo $block->escapeJsQuote($block->getDateOfLastDeployment());?>"
                 }
             }

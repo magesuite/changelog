@@ -51,4 +51,3 @@ interface DeploymentInterface extends \Magento\Framework\Api\ExtensibleDataInter
         \MageSuite\Changelog\Api\Data\DeploymentExtensionInterface $extensionAttributes
     );
 }
-

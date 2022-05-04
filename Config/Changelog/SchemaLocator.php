@@ -2,12 +2,10 @@
 
 namespace MageSuite\Changelog\Config\Changelog;
 
-use Magento\Framework\Module\Dir;
-
 class SchemaLocator implements \Magento\Framework\Config\SchemaLocatorInterface
 {
-    protected $_schema = null;
-    protected $_perFileSchema = null;
+    protected ?string $schema = null;
+    protected ?string $perFileSchema = null;
 
     /**
      * @param \Magento\Framework\Module\Dir\Reader $moduleReader
@@ -15,24 +13,24 @@ class SchemaLocator implements \Magento\Framework\Config\SchemaLocatorInterface
     public function __construct(
         \Magento\Framework\Module\Dir\Reader $moduleReader
     ) {
-        $etcDir = $moduleReader->getModuleDir(Dir::MODULE_ETC_DIR, 'MageSuite_Changelog');
-        $this->_schema = $etcDir . '/changelog_merged.xsd';
-        $this->_perFileSchema = $etcDir . '/changelog.xsd';
+        $etcDir = $moduleReader->getModuleDir(\Magento\Framework\Module\Dir::MODULE_ETC_DIR, 'MageSuite_Changelog');
+        $this->schema = sprintf('%s/changelog_merged.xsd', $etcDir);
+        $this->perFileSchema = sprintf('%s/changelog.xsd', $etcDir);
     }
 
     /**
      * @return string|null
      */
-    public function getSchema()
+    public function getSchema(): ?string
     {
-        return $this->_schema;
+        return $this->schema;
     }
 
     /**
      * @return string|null
      */
-    public function getPerFileSchema()
+    public function getPerFileSchema(): ?string
     {
-        return $this->_perFileSchema;
+        return $this->perFileSchema;
     }
 }
