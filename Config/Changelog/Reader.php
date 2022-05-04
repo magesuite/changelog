@@ -6,11 +6,12 @@ namespace MageSuite\Changelog\Config\Changelog;
 
 class Reader extends \Magento\Framework\Config\Reader\Filesystem
 {
-
+    // phpcs:ignore
     protected $_idAttributes = [
         '/config/module' => 'id',
     ];
 
+    // phpcs:ignore
     public function __construct(
         \MageSuite\Changelog\Config\Changelog\FileResolver $fileResolver,
         Converter $converter,

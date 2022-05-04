@@ -8,7 +8,7 @@ class Changelog extends \Magento\Backend\Controller\Adminhtml\Dashboard\AjaxBloc
     public function execute()
     {
         $output = $this->layoutFactory->create()
-            ->createBlock('MageSuite\Changelog\Block\Adminhtml\Dashboard\Changelog')
+            ->createBlock(\MageSuite\Changelog\Block\Adminhtml\Dashboard\Changelog::class)
             ->setName('changelog')
             ->toHtml();
 

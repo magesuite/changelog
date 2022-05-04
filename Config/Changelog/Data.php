@@ -4,6 +4,7 @@ namespace MageSuite\Changelog\Config\Changelog;
 
 class Data
 {
+    // phpcs:ignore
     protected $_dataStorage;
 
     /**

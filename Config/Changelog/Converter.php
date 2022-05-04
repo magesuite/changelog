@@ -43,7 +43,6 @@ class Converter implements \Magento\Framework\Config\ConverterInterface
         }
     }
 
-
     private function processTagNodes($tagNodes, &$output)
     {
         foreach ($tagNodes as $tagNode) {

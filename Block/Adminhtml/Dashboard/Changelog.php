@@ -21,7 +21,6 @@ class Changelog extends \Magento\Backend\Block\Template
         parent::__construct($context, $data);
     }
 
-
     public function getTrackerUrl()
     {
         return $this->configuration->getTrackerUrl();

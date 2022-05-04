@@ -7,10 +7,11 @@ namespace MageSuite\Changelog\Model;
 class Deployment extends \Magento\Framework\Model\AbstractModel
 {
 
-    protected $deploymentDataFactory;
+    protected \MageSuite\Changelog\Api\Data\DeploymentInterfaceFactory $deploymentDataFactory;
 
-    protected $dataObjectHelper;
+    protected \Magento\Framework\Api\DataObjectHelper $dataObjectHelper;
 
+    // phpcs:ignore
     protected $_eventPrefix = 'changelog_deployment';
 
     public function __construct(

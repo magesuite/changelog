@@ -5,11 +5,11 @@ namespace MageSuite\Changelog\Service\Deployment;
 class CreateDeploymentMarker
 {
 
-    protected $deploymentRepository;
+    protected \MageSuite\Changelog\Model\DeploymentRepository $deploymentRepository;
 
-    protected $deploymentFactory;
+    protected \MageSuite\Changelog\Model\DeploymentFactory $deploymentFactory;
 
-    protected $dateTime;
+    protected \Magento\Framework\Stdlib\DateTime\DateTime $dateTime;
 
     public function __construct(
         \MageSuite\Changelog\Model\DeploymentRepository $deploymentRepository,
@@ -29,7 +29,7 @@ class CreateDeploymentMarker
         try {
             return $deployment->save();
         } catch (\Exception $exception) {
-
+            // be verbose
         }
     }
 }

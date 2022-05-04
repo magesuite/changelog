@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace MageSuite\Changelog\Model\Data;
 
-use MageSuite\Changelog\Api\Data\ChangelogInterface;
-
-class Changelog extends \Magento\Framework\Api\AbstractSimpleObject implements ChangelogInterface
+class Changelog extends \Magento\Framework\Api\AbstractSimpleObject implements \MageSuite\Changelog\Api\Data\ChangelogInterface
 {
 
     public function getChangelogId()
@@ -29,7 +27,6 @@ class Changelog extends \Magento\Framework\Api\AbstractSimpleObject implements C
         return $this->setData(self::MODULE, $module);
     }
 
-
     public function getModule()
     {
         return $this->_get(self::MODULE);
@@ -44,7 +41,6 @@ class Changelog extends \Magento\Framework\Api\AbstractSimpleObject implements C
     {
         return $this->_get(self::DESCRIPTION);
     }
-
 
     public function setTicketId($ticketId)
     {
