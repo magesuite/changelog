@@ -17,4 +17,3 @@ class Changelog extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $this->_init('changelog_entity', 'changelog_id');
     }
 }
-

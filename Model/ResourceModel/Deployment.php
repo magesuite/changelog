@@ -17,4 +17,3 @@ class Deployment extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $this->_init('changelog_deployment', 'deployment_id');
     }
 }
-

@@ -28,6 +28,7 @@ class CreateDeploymentMarker
 
         try {
             return $deployment->save();
+            // phpcs:ignore
         } catch (\Exception $exception) {
             // be verbose
         }
