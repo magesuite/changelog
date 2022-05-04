@@ -6,7 +6,7 @@ namespace MageSuite\Changelog\Model\ResourceModel\Deployment;
 
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
-
+    // phpcs:ignore
     protected $_idFieldName = 'deployment_id';
 
     protected function _construct()

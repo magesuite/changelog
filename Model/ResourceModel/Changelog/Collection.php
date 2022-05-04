@@ -6,6 +6,7 @@ namespace MageSuite\Changelog\Model\ResourceModel\Changelog;
 
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
+    // phpcs:ignore
     protected $_idFieldName = 'changelog_id';
 
     protected function _construct()
@@ -16,9 +17,9 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         );
     }
 
+    // phpcs:ignore
     protected function _initSelect()
     {
         parent::_initSelect();
     }
 }
-

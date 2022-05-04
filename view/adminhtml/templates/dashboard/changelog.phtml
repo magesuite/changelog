@@ -53,9 +53,9 @@
         {
             "*": {
                 "changelog": {
-                    "baseChangelogUrl": "<?php echo $block->escapeJsQuote($block->getUrl('adminhtml/changelog/get', ['_current' => true]));?>",
-                    "trackerUrl" : "<?php echo $block->escapeJsQuote($block->getTrackerUrl());?>",
-                    "lastDeploymentDate" : "<?php echo $block->escapeJsQuote($block->getDateOfLastDeployment());?>"
+                    "baseChangelogUrl": "<?= $block->escapeJsQuote($block->getUrl('adminhtml/changelog/get', ['_current' => true]));?>",
+                    "trackerUrl" : "<?= $block->escapeJsQuote($block->getTrackerUrl());?>",
+                    "lastDeploymentDate" : "<?= $block->escapeJsQuote($block->getDateOfLastDeployment());?>"
                 }
             }
         }
