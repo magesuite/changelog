@@ -6,44 +6,44 @@ define([
 ], function ($, t,  moment) {
     "use strict";
     return function (config) {
-        const fromPicker = $('#from-picker');
-        const toPicker = $('#to-picker');
+        const $fromPicker = $('#from-picker');
+        const $toPicker = $('#to-picker');
 
-        const uiDatePickerTrigger = $(".ui-datepicker-trigger");
+        const $uiDatePickerTrigger = $(".ui-datepicker-trigger");
         $(document).ready(function () {
+            const $changelogToInput =  $('#changelog-to input');
+            const $changelogFromInput =  $('#changelog-from input');
 
             $('#Changelog').css('background', 'none');
 
-            fromPicker.datetimepicker({dateFormat: "yy-mm-dd"});
-            uiDatePickerTrigger.removeAttr("style");
-            uiDatePickerTrigger.click(function () {
-                fromPicker.focus();
+            $fromPicker.datetimepicker({dateFormat: "yy-mm-dd"});
+            $uiDatePickerTrigger.removeAttr("style");
+            $uiDatePickerTrigger.click(function () {
+                $fromPicker.focus();
             });
 
-            toPicker.datetimepicker({dateFormat: "mm/dd/yy"});
-            uiDatePickerTrigger.removeAttr("style");
-            uiDatePickerTrigger.click(function () {
-                toPicker.focus();
+            $toPicker.datetimepicker({dateFormat: "mm/dd/yy"});
+            $uiDatePickerTrigger.removeAttr("style");
+            $uiDatePickerTrigger.click(function () {
+                $toPicker.focus();
             });
 
             const from = moment().subtract(7, 'days').format('YYYY-MM-DD');
             const to = moment().format('YYYY-MM-DD');
-            fromPicker.val(from);
-            toPicker.val(to);
+            $fromPicker.val(from);
+            $toPicker.val(to);
 
-            fromPicker.attr('disabled', 'disabled');
-            jQuery('#changelog-to input').addClass('disabled')
+            $fromPicker.attr('disabled', 'disabled');
+            $changelogToInput.addClass('disabled')
 
-            toPicker.attr('disabled', 'disabled');
-            jQuery('#changelog-from input').addClass('disabled')
+            $toPicker.attr('disabled', 'disabled');
+            $changelogFromInput.addClass('disabled')
         });
 
         $('#time-helper').on('change', function(){
             let dateFrom = '';
             let dateTo = '';
 
-            const changelogToInput =  $('#changelog-to input');
-            const changelogFromInput =  $('#changelog-from input');
             const chosenOption = $("#time-helper option:selected" ).val();
 
             let disabled = true;
@@ -77,20 +77,20 @@ define([
             }
 
             if(disabled){
-                fromPicker.attr('disabled', 'disabled');
-                changelogToInput.addClass('disabled')
+                $fromPicker.attr('disabled', 'disabled');
+                $changelogToInput.addClass('disabled')
 
-                toPicker.attr('disabled', 'disabled');
-                changelogFromInput.addClass('disabled')
+                $toPicker.attr('disabled', 'disabled');
+                $changelogFromInput.addClass('disabled')
             } else {
-                fromPicker.removeAttr('disabled');
-                changelogToInput.removeClass('disabled')
+                $fromPicker.removeAttr('disabled');
+                $changelogToInput.removeClass('disabled')
 
-                toPicker.removeAttr('disabled');
-                changelogFromInput.removeClass('disabled')
+                $toPicker.removeAttr('disabled');
+                $changelogFromInput.removeClass('disabled')
             }
-            fromPicker.val(dateFrom);
-            toPicker.val(dateTo);
+            $fromPicker.val(dateFrom);
+            $toPicker.val(dateTo);
         });
 
         $('#get-changelog-button').on('click', function () {
@@ -99,7 +99,7 @@ define([
 
             $.ajax({
                 type: "GET",
-                url: config.baseChangelogUrl+'mode/'+mode+'/from/'+$('#from-picker').val()+'/to/'+$('#to-picker').val(),
+                url: config.baseChangelogUrl+'mode/'+mode+'/from/'+$fromPicker.val()+'/to/'+$toPicker.val(),
                 showLoader: true,
             }).done(function (results) {
                 if (results.status !== false) {
@@ -144,21 +144,21 @@ define([
         function renderTimeline(json){
             let html = '<div class="changelog-wrapper">';
 
-            jQuery.each(json, function(key, val) {
+            $.each(json, function(i, val) {
                 html += '<div class="changelog-module timeline">'
                         +'<span class="date">'+val.version_date+'</span>: '+val.module+' '+getIconForChangeType(val.change_type)+' '+val.change_overview+
                     '</div>'
             });
             html += '</div>';
 
-            let deploymentMarker = '<div class="changelog-module timeline deployment">- DEPLOYMENT ('+config.lastDeploymentDate+') -</div>';
-            jQuery('#changelog-content').html(html);
+            const deploymentMarker = '<div class="changelog-module timeline deployment">- DEPLOYMENT ('+config.lastDeploymentDate+') -</div>';
+            $('#changelog-content').html(html);
 
             let marked = false;
-            jQuery('div.timeline').each(function(i,el){
-                const changeDate = jQuery(el).find('span.date').text();
+            $('div.timeline').each(function(i, el){
+                const changeDate = $(el).find('span.date').text();
                 if(changeDate < config.lastDeploymentDate && !marked){
-                    jQuery(deploymentMarker).insertBefore(el)
+                    $(deploymentMarker).insertBefore(el)
                     marked = true;
                 }
             });
@@ -167,20 +167,21 @@ define([
         function renderResults(json){
             let html = '<div class="changelog-wrapper">';
 
-            let descriptions = [];
-            let dates = [];
-            let links = [];
+            const descriptions = [];
+            const dates = [];
+            const links = [];
 
-            jQuery.each(json, function(key, val) {
+            $.each(json, function(key, val) {
 
                 let moduleHtml = '<div class="changelog-module"><div class="module-header"><span class="module-name">'+key+'</span>' +
                     '<span onclick="" class="module-info link">?</span>' +
                     '<span class="module-description"></span></div><div class="module-content">';
 
-                jQuery.each(val, function(version, changes){
+                $.each(val, function(version, changes){
                     let versionHtml = '<div class="changelog-version"><span class="version-wrapper">'+version+'</span><span class="tag-date" id="tag_'+key+'"></span></div>';
-                    jQuery.each(changes, function(i, change){
+                    $.each(changes, function(i, change){
                       let changeHtml = '<div class="changelog-change">'+getIconForChangeType(change.change_type)+' '+change.change_overview;
+
                       if(change.ticket_id != ''){
                           let ticketUrl = '';
                           if(config.trackerUrl.length){
@@ -209,24 +210,24 @@ define([
 
             html += '</div>';
 
-            jQuery('#changelog-content').html(html);
+            $('#changelog-content').html(html);
 
-            for (let key in descriptions) {
+            for (const key in descriptions) {
                 if (!descriptions.hasOwnProperty(key)) {
                     continue;
                 }
 
-                const extensionHeader = $('div.module-header:contains("' + key + '")');
-                extensionHeader.find('span.module-description').html(descriptions[key])
-                extensionHeader.find('span.link').attr('onclick', 'window.open("'+links[key]+'")');
+                const $extensionHeader = $('div.module-header:contains("' + key + '")');
+                $extensionHeader.find('span.module-description').html(descriptions[key])
+                $extensionHeader.find('span.link').attr('onclick', 'window.open("'+links[key]+'")');
             }
 
-            for (let key in dates) {
+            for (const key in dates) {
                 if (!dates.hasOwnProperty(key)) {
                     continue;
                 }
 
-                jQuery('#'+key).html(dates[key])
+                $('#'+key).html(dates[key])
             }
         }
     }
