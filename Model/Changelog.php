@@ -7,7 +7,7 @@ namespace MageSuite\Changelog\Model;
 class Changelog extends \Magento\Framework\Model\AbstractModel
 {
 
-    protected \MageSuite\Changelog\Api\Data\ChangelogInterfaceFactory|ChangelogInterfaceFactory $changelogDataFactory;
+    protected \MageSuite\Changelog\Api\Data\ChangelogInterfaceFactory $changelogDataFactory;
 
     protected \Magento\Framework\Api\DataObjectHelper $dataObjectHelper;
 
