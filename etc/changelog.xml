@@ -71,6 +71,12 @@
                         <overview>Broken XMLs (bad syntax) will be ignore and will not throw exception.</overview>
                     </entry>
                 </tag>
+                <tag version="1.2.2" date="2022-05-10">
+                    <entry>
+                        <type>REFACTOR</type>
+                        <overview>Adjusted model compability to php7</overview>
+                    </entry>
+                </tag>
             </changelog>
     </module>
 </config>
