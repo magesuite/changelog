@@ -1,0 +1,22 @@
+{
+    "name": "creativestyle/magesuite-changelog",
+    "description": "Extension to show changelog of all compatible extension in admin panel.",
+    "type": "magento2-module",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Adam Karnowka",
+            "email": "adam.karnowka@creativestyle.pl"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "MageSuite\\Changelog\\": ""
+        }
+    }
+}

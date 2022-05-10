@@ -1,0 +1,62 @@
+<div class="clearfix">
+    <div class="filters-wrapper">
+        <div class="display-mode filters">
+            <div class="display-mode-label">Display mode:</div>
+            <ul class="filters">
+                <li class="padded">
+                    <input checked="checked" type="radio" name="mode" id="mode_timeline" value="timeline">
+                    <label for="mode_timeline">Timeline</label>
+                </li>
+                <li class="padded">
+                    <input type="radio" name="mode" value="grouped" id="mode_grouped">
+                    <label for="mode_grouped">By extension</label>
+                </li>
+            </ul>
+        </div>
+    <ul class="filters right">
+        <li>
+            <select id="time-helper" name="time-helper" class="select admin__control-select">
+                <option value="last_week">Last week</option>
+                <option value="last_month">Last month</option>
+                <option value="last_year">Last year</option>
+                <option value="last_deployment">Since last deployment</option>
+                <option value="custom_range">Custom range</option>
+                <option value="everything">Everything</option>
+            </select>
+        </li>
+        <li id="picker-from">
+            <input name="from" id="from-picker" class="from-picker admin__control-text" value="04/03/2017 06:50"/>
+            <button type="button" style="display:none;" class="ui-datepicker-trigger v-middle">
+                <span>Select Date</span>
+            </button>
+        </li>
+        <li id="picker-to">
+            <input name="to" id="to-picker" class="to-picker admin__control-text" value="04/12/2017 06:49"/>
+            <button type="button" style="display:none;" class="ui-datepicker-trigger v-middle">
+                <span>Select Date</span>
+            </button>
+        </li>
+
+        <li>
+            <button class="action-primary" type="submit" id="get-changelog-button">Apply</button>
+        </li>
+    </ul>
+    </div>
+    <div id="changelog-content"></div>
+</div>
+
+<style type="text/css">
+
+</style>
+
+<script type="text/x-magento-init">
+        {
+            "*": {
+                "changelog": {
+                    "baseChangelogUrl": "<?= $block->escapeJsQuote($block->getUrl('adminhtml/changelog/get', ['_current' => true]));?>",
+                    "trackerUrl" : "<?= $block->escapeJsQuote($block->getTrackerUrl());?>",
+                    "lastDeploymentDate" : "<?= $block->escapeJsQuote($block->getDateOfLastDeployment());?>"
+                }
+            }
+        }
+</script>

@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+	<route url="/V1/magesuite-changelog/changelog" method="POST">
+		<service class="MageSuite\Changelog\Api\ChangelogRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="MageSuite_Changelog::Changelog_save"/>
+		</resources>
+	</route>
+	<route url="/V1/magesuite-changelog/changelog/search" method="GET">
+		<service class="MageSuite\Changelog\Api\ChangelogRepositoryInterface" method="getList"/>
+		<resources>
+			<resource ref="MageSuite_Changelog::Changelog_view"/>
+		</resources>
+	</route>
+	<route url="/V1/magesuite-changelog/changelog/:changelogId" method="GET">
+		<service class="MageSuite\Changelog\Api\ChangelogRepositoryInterface" method="get"/>
+		<resources>
+			<resource ref="MageSuite_Changelog::Changelog_view"/>
+		</resources>
+	</route>
+	<route url="/V1/magesuite-changelog/changelog/:changelogId" method="PUT">
+		<service class="MageSuite\Changelog\Api\ChangelogRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="MageSuite_Changelog::Changelog_update"/>
+		</resources>
+	</route>
+	<route url="/V1/magesuite-changelog/changelog/:changelogId" method="DELETE">
+		<service class="MageSuite\Changelog\Api\ChangelogRepositoryInterface" method="deleteById"/>
+		<resources>
+			<resource ref="MageSuite_Changelog::Changelog_delete"/>
+		</resources>
+	</route>
+	<route url="/V1/magesuite-changelog/deployment" method="POST">
+		<service class="MageSuite\Changelog\Api\DeploymentRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="MageSuite_Changelog::Deployment_save"/>
+		</resources>
+	</route>
+	<route url="/V1/magesuite-changelog/deployment/search" method="GET">
+		<service class="MageSuite\Changelog\Api\DeploymentRepositoryInterface" method="getList"/>
+		<resources>
+			<resource ref="MageSuite_Changelog::Deployment_view"/>
+		</resources>
+	</route>
+	<route url="/V1/magesuite-changelog/deployment/:deploymentId" method="GET">
+		<service class="MageSuite\Changelog\Api\DeploymentRepositoryInterface" method="get"/>
+		<resources>
+			<resource ref="MageSuite_Changelog::Deployment_view"/>
+		</resources>
+	</route>
+	<route url="/V1/magesuite-changelog/deployment/:deploymentId" method="PUT">
+		<service class="MageSuite\Changelog\Api\DeploymentRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="MageSuite_Changelog::Deployment_update"/>
+		</resources>
+	</route>
+	<route url="/V1/magesuite-changelog/deployment/:deploymentId" method="DELETE">
+		<service class="MageSuite\Changelog\Api\DeploymentRepositoryInterface" method="deleteById"/>
+		<resources>
+			<resource ref="MageSuite_Changelog::Deployment_delete"/>
+		</resources>
+	</route>
+</routes>
