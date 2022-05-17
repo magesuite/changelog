@@ -38,9 +38,9 @@ class Converter implements \Magento\Framework\Config\ConverterInterface
                 $output['module'][$nodeId] = $data;
                 $this->processTagNodes($changelogNode->childNodes, $output['module'][$nodeId]);
             }
-
-            return $output;
         }
+
+        return $output;
     }
 
     private function processTagNodes($tagNodes, &$output)
