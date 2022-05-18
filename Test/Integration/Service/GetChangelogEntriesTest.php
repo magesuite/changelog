@@ -32,6 +32,13 @@ class GetChangelogEntriesTest extends \PHPUnit\Framework\TestCase
     {
         $entries = $this->getChangelogEntries->execute(null, null);
         $this->assertIsArray($entries);
-        $this->assertEquals('MageSuite_Changelog', $entries[0]['module']);
+
+        $changelogEntryFound = false;
+        foreach ($entries as $entry) {
+            if ($entry['module']=='MageSuite_Changelog') {
+                $changelogEntryFound = true;
+            }
+        }
+        $this->assertEquals(true, $changelogEntryFound);
     }
 }

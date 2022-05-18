@@ -27,6 +27,12 @@
                         <overview>Fixed obtaining list of nodes from XML</overview>
                     </entry>
                 </tag>
+                <tag version="1.0.3" date="2022-05-18">
+                    <entry>
+                        <type>FIX</type>
+                        <overview>Corrected integration test to support different order of extensions.</overview>
+                    </entry>
+                </tag>
             </changelog>
     </module>
 </config>
