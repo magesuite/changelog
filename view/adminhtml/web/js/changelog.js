@@ -41,6 +41,9 @@ define([
         });
 
         $('#time-helper').on('change', function(){
+            const $changelogToInput =  $('#changelog-to input');
+            const $changelogFromInput =  $('#changelog-from input');
+
             let dateFrom = '';
             let dateTo = '';
 
@@ -151,7 +154,7 @@ define([
             });
             html += '</div>';
 
-            const deploymentMarker = '<div class="changelog-module timeline deployment">- DEPLOYMENT ('+config.lastDeploymentDate+') -</div>';
+            const deploymentMarker = '<div class="changelog-module timeline deployment">- DEPLOYMENT ('+moment().utc().format(config.lastDeploymentDate,'YYYY-MM-DD')+') -</div>';
             $('#changelog-content').html(html);
 
             let marked = false;
