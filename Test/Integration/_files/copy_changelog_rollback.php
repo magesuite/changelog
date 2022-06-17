@@ -1,3 +1,3 @@
 <?php
 
-unlink(__DIR__.'/../../../../../../../dev/tests/integration/_files/Magento/TestModuleSample/etc/changelog.xml');
+unlink(BP . '/dev/tests/integration/_files/Magento/TestModuleSample/etc/changelog.xml');
