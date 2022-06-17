@@ -96,6 +96,11 @@ define([
             $toPicker.val(dateTo);
         });
 
+        $('#download-changelog-button').on('click', function () {
+            const mode = $("input:radio[name ='mode']:checked").val();
+            window.location = config.baseDownloadChangelogUrl+'mode/grouped/from/'+$fromPicker.val()+'/to/'+$toPicker.val();
+        });
+
         $('#get-changelog-button').on('click', function () {
 
             const mode = $("input:radio[name ='mode']:checked").val();

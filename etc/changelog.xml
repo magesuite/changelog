@@ -43,6 +43,24 @@
                         <overview>Fixed timerange selector</overview>
                     </entry>
                 </tag>
+                <tag version="1.1.0" date="2022-06-15">
+                    <entry>
+                        <type>FEATURE</type>
+                        <overview>Added possibility to export release notes in Markdown format, so it can be easily pasted into Confluence page.</overview>
+                    </entry>
+                    <entry>
+                        <type>FIX</type>
+                        <overview>Removed unnecessary style definitions.</overview>
+                    </entry>
+                    <entry>
+                        <type>DEFAULT</type>
+                        <overview>Code refactor to use abstract controller class.</overview>
+                    </entry>
+                    <entry>
+                        <type>DEFAULT</type>
+                        <overview>Added integration tests for controllers.</overview>
+                    </entry>
+                </tag>
             </changelog>
     </module>
 </config>

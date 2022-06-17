@@ -1,0 +1,21 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:MageSuite_Changelog:etc/changelog.xsd">
+    <module
+        id="Module_Dummy"
+        name="Module_Dummy"
+        description="This module is fake changelog for integration test purposes.">
+        <changelog>
+            <tag version="1.0.0" date="2021-03-12">
+                <entry>
+                    <type>INIT</type>
+                    <overview>Initial release of dummy changelog</overview>
+                </entry>
+            </tag>
+            <tag version="1.0.1" date="2022-05-11">
+                <entry>
+                    <type>FIX</type>
+                    <overview>Dummy change</overview>
+                </entry>
+            </tag>
+        </changelog>
+    </module>
+</config>

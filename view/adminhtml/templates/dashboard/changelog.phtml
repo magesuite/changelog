@@ -36,24 +36,23 @@
                 <span>Select Date</span>
             </button>
         </li>
-
         <li>
             <button class="action-primary" type="submit" id="get-changelog-button">Apply</button>
+        </li>
+        <li>
+            <button class="action-secondary" type="submit" id="download-changelog-button">Markdown export</button>
         </li>
     </ul>
     </div>
     <div id="changelog-content"></div>
 </div>
 
-<style type="text/css">
-
-</style>
-
 <script type="text/x-magento-init">
         {
             "*": {
                 "changelog": {
-                    "baseChangelogUrl": "<?= $block->escapeJsQuote($block->getUrl('adminhtml/changelog/get', ['_current' => true]));?>",
+                    "baseChangelogUrl": "<?= $block->escapeJsQuote($block->getUrl('changelog/changelog/get', ['_current' => true]));?>",
+                    "baseDownloadChangelogUrl": "<?= $block->escapeJsQuote($block->getUrl('changelog/changelog/markdown', ['_current' => true]));?>",
                     "trackerUrl" : "<?= $block->escapeJsQuote($block->getTrackerUrl());?>",
                     "lastDeploymentDate" : "<?= $block->escapeJsQuote($block->getDateOfLastDeployment());?>"
                 }
