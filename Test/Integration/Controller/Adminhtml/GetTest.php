@@ -1,17 +1,21 @@
 <?php
 namespace Magesuite\Changelog\Test\Integration\Controller\Adminhtml;
 
+use Magento\Framework\Shell;
+
 class GetTest extends \Magento\TestFramework\TestCase\AbstractBackendController
 {
     protected $addChangelogEntriesToDatabase;
     protected $cacheTypeList;
-
+    protected $cache;
+  
     public function setUp(): void
     {
         $this->objectManager = \Magento\TestFramework\ObjectManager::getInstance();
         $this->addChangelogEntriesToDatabase = $this->objectManager->get(\MageSuite\Changelog\Service\AddChangelogEntriesToDatabase::class);
         $this->cacheTypeList = $this->objectManager->get(\Magento\Framework\App\Cache\TypeListInterface::class);
-
+        $this->cache = $this->objectManager->get(\Magento\Framework\Config\CacheInterface::class);
+    
         parent::setUp();
     }
 
@@ -46,6 +50,7 @@ class GetTest extends \Magento\TestFramework\TestCase\AbstractBackendController
      * @magentoDbIsolation enabled
      * @magentoAppIsolation enabled
      * @magentoDataFixture copyDummyChangelog
+     * @magentoCache all disabled
      */
     public function testItFetchesChangelogEntriesFromOtherExtensions()
     {
@@ -57,8 +62,10 @@ class GetTest extends \Magento\TestFramework\TestCase\AbstractBackendController
         ];
 
         $this->cacheTypeList->cleanType('config');
+        $this->cache->remove('magesuite_changelog');
         $this->addChangelogEntriesToDatabase->execute();
         $entries = json_decode($this->fetchChangelogEntries($getData), true);
+
         $this->assertArrayHasKey('Module_Dummy', $entries);
         $this->assertArrayHasKey('1.0.0', $entries['Module_Dummy']);
 
@@ -69,6 +76,7 @@ class GetTest extends \Magento\TestFramework\TestCase\AbstractBackendController
     public static function copyDummyChangelog()
     {
         require __DIR__ . '/../../_files/copy_changelog.php';
+
     }
 
     public static function copyDummyChangelogRollback()

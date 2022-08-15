@@ -32,6 +32,7 @@ class FileResolver implements \Magento\Framework\Config\FileResolverInterface
     public function get($filename, $scope)
     {
         $modulePaths = $this->componentRegistrar->getPaths(\Magento\Framework\Component\ComponentRegistrar::MODULE);
+        $modulePaths['Magento_TestModuleSample'] = BP . '/dev/tests/integration/_files/Magento/TestModuleSample';
         $themePaths = $this->componentRegistrar->getPaths(\Magento\Framework\Component\ComponentRegistrar::THEME);
 
         $changelogFiles = $this->getChangelogFiles(array_merge($modulePaths, $themePaths));
