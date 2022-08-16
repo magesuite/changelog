@@ -26,6 +26,7 @@ class GetChangelogEntriesTest extends \PHPUnit\Framework\TestCase
         $entries = $this->getChangelogEntries->execute(null, 'grouped');
         $this->assertIsArray($entries);
         $this->assertArrayHasKey('MageSuite_Changelog', $entries);
+        $this->assertArrayHasKey('MageSuite_Patches', $entries);
     }
 
     public function testItGetsChangelogDataInTimelineModeCorrectly()
@@ -39,6 +40,7 @@ class GetChangelogEntriesTest extends \PHPUnit\Framework\TestCase
                 $changelogEntryFound = true;
             }
         }
+
         $this->assertEquals(true, $changelogEntryFound);
     }
 }
