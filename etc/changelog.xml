@@ -67,10 +67,18 @@
                         <overview>Adjusted filepaths in integration tests for compability with Jenkins.</overview>
                     </entry>
                 </tag>
-                <tag version="1.1.2" date="2022-08-15">
+                <tag version="1.2.0" date="2022-08-15">
                     <entry>
-                        <type>FIX</type>
-                        <overview>Fixed integration test for getTest controller.</overview>
+                        <type>FEATURE</type>
+                        <overview>Support for 3rd party modules and extensions through paths in di.xml.</overview>
+                    </entry>
+                    <entry>
+                        <type>FEATURE</type>
+                        <overview>Changes from magesuite Magento patches will now be shown in changelog.</overview>
+                    </entry>
+                    <entry>
+                        <type>STYLE</type>
+                        <overview>Updated fonts display for better reading experience.</overview>
                     </entry>
                 </tag>
             </changelog>

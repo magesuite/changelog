@@ -12,7 +12,8 @@
 
     <preference for="MageSuite\Changelog\Api\ChangelogRepositoryInterface"
                 type="MageSuite\Changelog\Model\ChangelogRepository"/>
-    <preference for="MageSuite\Changelog\Api\Data\ChangelogInterface" type="MageSuite\Changelog\Model\Data\Changelog"/>
+    <preference for="MageSuite\Changelog\Api\Data\ChangelogInterface"
+                type="MageSuite\Changelog\Model\Data\Changelog"/>
     <preference for="MageSuite\Changelog\Api\Data\ChangelogSearchResultsInterface"
                 type="Magento\Framework\Api\SearchResults"/>
     <preference for="MageSuite\Changelog\Api\DeploymentRepositoryInterface"
@@ -44,6 +45,15 @@
     <type name="MageSuite\Changelog\Config\Changelog\Data">
         <arguments>
             <argument name="dataStorage" xsi:type="object">changelogDataStorage</argument>
+        </arguments>
+    </type>
+
+    <!-- Place custom paths to 3rd party libs/modules here-->
+    <type name="MageSuite\Changelog\Model\CustomChangelogPathsPool">
+        <arguments>
+            <argument name="customChangelogPaths" xsi:type="array">
+                <item name="magesuite_patches" xsi:type="string">vendor/creativestyle/magento-patches/changelog.xml</item>
+            </argument>
         </arguments>
     </type>
 </config>

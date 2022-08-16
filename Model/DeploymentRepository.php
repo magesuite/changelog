@@ -160,6 +160,7 @@ class DeploymentRepository implements \MageSuite\Changelog\Api\DeploymentReposit
         if ($deploymentsList->getTotalCount()==0) {
             return $this->deploymentFactory->create();
         }
+
         return $deploymentsList->getItems()[0];
     }
 }
