@@ -74,11 +74,29 @@
                     </entry>
                     <entry>
                         <type>FEATURE</type>
-                        <overview>Changes from magesuite Magento patches will now be shown in changelog.</overview>
+                        <overview>Changes from MageSuite Magento patches will now be shown in changelog.</overview>
                     </entry>
                     <entry>
                         <type>STYLE</type>
                         <overview>Updated fonts display for better reading experience.</overview>
+                    </entry>
+                </tag>
+                <tag version="1.2.1" date="2022-08-15">
+                    <entry>
+                        <type>FEATURE</type>
+                        <overview>Changelog can now be seen in separate page, find it in SYSTEM / MAGESUITE CHANGELOG</overview>
+                    </entry>
+                    <entry>
+                        <type>DEFAULT</type>
+                        <overview>Change default timerange to last month (instead of last week)</overview>
+                    </entry>
+                    <entry>
+                        <type>DEFAULT</type>
+                        <overview>Changelog tab is now selected by default in dashboard view.</overview>
+                    </entry>
+                    <entry>
+                        <type>DEFAULT</type>
+                        <overview>Initial form is now rendered statically, not through AJAX.</overview>
                     </entry>
                 </tag>
             </changelog>
