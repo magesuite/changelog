@@ -12,9 +12,8 @@ class AddChangelogTabToDashboard extends \Magento\Backend\Block\Dashboard\Grids
             'changelog',
             [
                 'label'     => __('Changelog'),
-                'url'       => $this->getUrl('changelog/dashboard/changelog', ['_current' => true]),
-                'class'     => 'ajax',
-                'active'    => false
+                'content'   => $this->getLayout()->createBlock(\MageSuite\Changelog\Block\Adminhtml\Dashboard\Changelog::class)->toHtml(),
+                'active'    => true,
             ]
         );
     }
