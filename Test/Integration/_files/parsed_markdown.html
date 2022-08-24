@@ -1,0 +1,21 @@
+<h2>New feature in changelog extension!</h2>
+<p>Sometimes, your feature or change is more complex - sometimes it requires additional guidelines, explanation about configuration or way of working.</p>
+<p>Till now, changelog only allowed to include small, brief notifications about introduced changes.</p>
+<p>This is about to change with new feature, which allows developers and agencies to propagate additional content through admin panel.</p>
+<h4>💡 For developers:</h4>
+<p>When you create changelog entry in <code>changelog.xml</code> - you may now add extra node:</p>
+<pre><code>&lt;tag&gt;
+    &lt;type&gt;FEATURE&lt;/type&gt;
+    &lt;overview&gt;New feature coming in!&lt;/overview&gt;
+    &lt;doc_reference&gt;markdown_file_with_additional_information&lt;/doc_reference&gt;
+&lt;/tag&gt;
+</code></pre>
+<p>Then, simply create markdown file in folder <code>/doc</code> (in root directory of your extension) and place there a file (in above case: <code>markdown_file_with_additional_information.MD</code>) - keep in mind to add .MD extension.
+When changelog is rendered, Markdown content will be parsed to HTML and displayed accordingly.</p>
+<p>You can see how this very page is created in <a href="https://github.com/magesuite/changelog">magesuite-changelog</a> extension.</p>
+<p><img src="img.png" alt="img.png" /></p>
+<h4>Some things to keep in mind:</h4>
+<ul>
+<li>Images can be included, however with absolute URLs only</li>
+<li>Feel free to use lists, code snippets and all other directives provided by Markdown syntax</li>
+</ul>

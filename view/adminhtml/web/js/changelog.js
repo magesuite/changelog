@@ -2,9 +2,22 @@ define([
     'jquery',
     'mage/translate',
     'moment',
-    'mage/calendar'
-], function ($, t,  moment) {
+    'mage/calendar',
+    'Magento_Ui/js/modal/modal'
+], function ($, t,  moment, calendar, modal) {
     "use strict";
+    var options = {
+        type: 'slide',
+        responsive: true,
+        innerScroll: true,
+        buttons: [{
+            text: $.mage.__('Continue'),
+            class: 'primary action submit btn btn-default',
+            click: function () {
+                this.closeModal();
+            }
+        }]
+    };
     return function (config) {
         const $fromPicker = $('#from-picker');
         const $toPicker = $('#to-picker');
@@ -96,9 +109,15 @@ define([
             $toPicker.val(dateTo);
         });
 
-        $('#download-changelog-button').on('click', function () {
+        $('#download-changelog-button').on('click', function (){
+
+
+
+
+
+            /*
             const mode = $("input:radio[name ='mode']:checked").val();
-            window.location = config.baseDownloadChangelogUrl+'mode/grouped/from/'+$fromPicker.val()+'/to/'+$toPicker.val();
+            window.location = config.baseDownloadChangelogUrl+'mode/grouped/from/'+$fromPicker.val()+'/to/'+$toPicker.val();*/
         });
 
         $('#get-changelog-button').on('click', function () {
@@ -171,7 +190,9 @@ define([
                 }
             });
         }
-
+        function preview(reference){
+            alert(reference)
+        }
         function renderResults(json){
             let html = '<div class="changelog-wrapper">';
 
@@ -198,6 +219,10 @@ define([
                           changeHtml += '<span class="ticket" '+ticketUrl+'>'+change.ticket_id+'</span>';
                       }
 
+                      if(change.doc_reference != ''){
+                          changeHtml += '<span class="ticket reference-button" reference="'+change.doc_reference+'" class="ticket">TELL ME MORE!</span>';
+                      }
+
                       if(change.change_url){
                           changeHtml += '<a href="'+change.change_url+'" target="_blank"><span class="see-more">See more</span></a>';
                       }
@@ -220,6 +245,24 @@ define([
 
             $('#changelog-content').html(html);
 
+            $('.reference-button').on("click", function(){
+                $.ajax({
+                    url:config.markdownPreviewUrl,
+                    type:'POST',
+                    showLoader: true,
+                    dataType: 'json',
+                    data: {
+                        filename: $(this).attr('reference')
+                    },
+                    complete: function(data) {
+                        $('.modal-body-content p').html(data.responseText);
+                        $("#modal").modal(options).modal('openModal');
+                    },
+                    error: function (xhr, status, errorThrown) {
+                        console.log('Error: ', errorThrown);
+                    }
+                });
+            })
             for (const key in descriptions) {
                 if (!descriptions.hasOwnProperty(key)) {
                     continue;

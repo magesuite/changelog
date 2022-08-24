@@ -12,7 +12,8 @@
             "change_overview": true,
             "change_description": true,
             "change_url": true,
-            "highlighted": true
+            "highlighted": true,
+            "doc_reference": true
         },
         "constraint": {
             "PRIMARY": true

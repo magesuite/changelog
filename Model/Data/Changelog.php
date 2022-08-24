@@ -176,4 +176,14 @@ class Changelog extends \Magento\Framework\Api\AbstractSimpleObject implements \
     {
         return $this->_data;
     }
+
+    public function setDocReference($docReference)
+    {
+        return $this->setData(self::DOC_REFERENCE, $docReference);
+    }
+
+    public function getDocReference(): array
+    {
+        return $this->_get(self::DOC_REFERENCE);
+    }
 }

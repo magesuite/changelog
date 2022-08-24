@@ -6,6 +6,8 @@ abstract class AbstractChangelogAction extends \Magento\Backend\App\Action
 {
     protected \MageSuite\Changelog\Service\GetChangelogEntries $getChangelogEntries;
 
+    protected \Erusev\Parsedown\Parsedown $parseDown;
+
     const ADMIN_RESOURCE = 'MageSuite_Changelog::Changelog';
 
     public function __construct(
@@ -14,13 +16,15 @@ abstract class AbstractChangelogAction extends \Magento\Backend\App\Action
         \Magento\Framework\Controller\Result\JsonFactory $jsonResultFactory,
         \Magento\Framework\Controller\Result\RawFactory $resultRawFactory,
         \Magento\Framework\Api\Search\SearchCriteriaBuilder $searchCriteriaBuilder,
-        \Magento\Framework\Api\FilterBuilder $filterBuilder
+        \Magento\Framework\Api\FilterBuilder $filterBuilder,
+        \Erusev\Parsedown\Parsedown $parseDown
     ) {
         $this->getChangelogEntries = $getChangelogEntries;
         $this->jsonResultFactory = $jsonResultFactory;
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
         $this->filterBuilder = $filterBuilder;
         $this->resultRawFactory = $resultRawFactory;
+        $this->parseDown = $parseDown;
 
         parent::__construct($context);
     }

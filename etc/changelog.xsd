@@ -32,6 +32,7 @@
                                                                 </xs:element>
                                                                 <xs:element type="xs:string" name="url" minOccurs="0"/>
                                                                 <xs:element type="xs:string" name="ticket_id" minOccurs="0"/>
+                                                                <xs:element type="xs:string" name="doc_reference" minOccurs="0"/>
                                                             </xs:sequence>
                                                         </xs:complexType>
                                                     </xs:element>
