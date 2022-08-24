@@ -13,6 +13,7 @@
 		<column name="change_description" nullable="true" xsi:type="text" comment="Long description of change" />
 		<column name="change_url" nullable="true" xsi:type="varchar" length="255" comment="Url to change description" />
 		<column name="highlighted" nullable="true" xsi:type="smallint" comment="Highlight flag" />
+		<column name="doc_reference" nullable="true" xsi:type="varchar" length="255" comment="Filename of markdown file in doc folder" />
 
 		<constraint xsi:type="primary" referenceId="PRIMARY">
 			<column name="changelog_id"/>

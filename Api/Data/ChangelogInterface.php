@@ -18,6 +18,7 @@ interface ChangelogInterface
     const CHANGE_DESCRIPTION = 'change_description';
     const CHANGE_URL = 'change_url';
     const HIGHLIGHTED = 'highlihgted';
+    const DOC_REFERENCE = 'doc_reference';
 
     /**
      * @return string|null
@@ -150,4 +151,15 @@ interface ChangelogInterface
      * @return \MageSuite\Changelog\Api\Data\ChangelogInterface
      */
     public function setHighlighted($highlighted);
+
+    /**
+     * @return string|null
+     */
+    public function getDocReference();
+
+    /**
+     * @param string $version
+     * @return \MageSuite\Changelog\Api\Data\ChangelogInterface
+     */
+    public function setDocReference($docReference);
 }

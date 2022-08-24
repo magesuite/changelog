@@ -22,6 +22,7 @@ class FlattenChangelog
                     $entry['change_url'] = $change['url'] ?? '';
                     $entry['ticket_id'] = $change['ticket_id'] ?? '';
                     $entry['highlighted'] = $change['highlighted'] ?? '0';
+                    $entry['doc_reference'] = $change['doc_reference'] ?? '';
 
                     $entries[] = $entry;
                 }

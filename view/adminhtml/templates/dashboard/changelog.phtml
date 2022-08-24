@@ -44,6 +44,14 @@
         </li>
     </ul>
     </div>
+
+
+    <div id="modal" style="display: none;">
+        <div class="modal-body-content">
+            <p><?= $block->escapeHtml(__('Content')) ?></p>
+        </div>
+    </div>
+
     <div id="changelog-content"></div>
 </div>
 
@@ -54,8 +62,13 @@
                     "baseChangelogUrl": "<?= $block->escapeJsQuote($block->getUrl('changelog/changelog/get', ['_current' => true]));?>",
                     "baseDownloadChangelogUrl": "<?= $block->escapeJsQuote($block->getUrl('changelog/changelog/markdown', ['_current' => true]));?>",
                     "trackerUrl" : "<?= $block->escapeJsQuote($block->getTrackerUrl());?>",
-                    "lastDeploymentDate" : "<?= $block->escapeJsQuote($block->getDateOfLastDeployment());?>"
+                    "lastDeploymentDate" : "<?= $block->escapeJsQuote($block->getDateOfLastDeployment());?>",
+                    "markdownPreviewUrl":  "<?= $block->escapeJsQuote($block->getUrl('changelog/changelog/preview', ['_current' => true]));?>"
                 }
             }
         }
 </script>
+
+<style>
+
+</style>

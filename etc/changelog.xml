@@ -9,6 +9,7 @@
                     <entry>
                         <type>INIT</type>
                         <overview>Initial release</overview>
+                        <doc_reference>01_first_steps</doc_reference>
                     </entry>
                 </tag>
                 <tag version="1.0.1" date="2022-05-11">
@@ -71,6 +72,7 @@
                     <entry>
                         <type>FEATURE</type>
                         <overview>Support for 3rd party modules and extensions through paths in di.xml.</overview>
+                        <doc_reference>03_custom_paths</doc_reference>
                     </entry>
                     <entry>
                         <type>FEATURE</type>
@@ -97,6 +99,17 @@
                     <entry>
                         <type>DEFAULT</type>
                         <overview>Initial form is now rendered statically, not through AJAX.</overview>
+                    </entry>
+                </tag>
+                <tag version="1.3.0" date="2022-08-19">
+                    <entry>
+                        <type>FEATURE</type>
+                        <overview>Possibiility to include and preview markdown files and reference it with change.</overview>
+                        <doc_reference>02_adding_markown_descriptions</doc_reference>
+                    </entry>
+                    <entry>
+                        <type>STYLE</type>
+                        <overview>Refreshed feel and look of timeline view.</overview>
                     </entry>
                 </tag>
             </changelog>
