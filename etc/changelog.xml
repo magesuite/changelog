@@ -112,6 +112,12 @@
                         <overview>Refreshed feel and look of timeline view.</overview>
                     </entry>
                 </tag>
+                <tag version="1.3.1" date="2022-08-26">
+                    <entry>
+                        <type>DEFAULT</type>
+                        <overview>Added MFTF functional test</overview>
+                    </entry>
+                </tag>
             </changelog>
     </module>
 </config>

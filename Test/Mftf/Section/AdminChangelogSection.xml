@@ -1,0 +1,8 @@
+<sections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:Page/etc/SectionObject.xsd">
+        <section name="AdminChangelogSection">
+        <element name="changelogTab" type="block" selector="#grid_tab_changelog"/>
+        <element name="timeDropdown" type="select" selector="select#time-helper"/>
+        <element name="applyButton" type="button" selector="button#get-changelog-button"/>
+    </section>
+</sections>
