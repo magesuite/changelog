@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="AdminChangelogTabRenderedTest">
+        <annotations>
+            <description value="As a merchant I want to see changelog form visible on dashboard."/>
+            <group value="magesuite"/>
+            <group value="changelog"/>
+        </annotations>
+
+        <actionGroup ref="AdminLoginActionGroup" stepKey="loginAsAdmin" />
+        <seeElement selector="{{AdminChangelogSection.changelogTab}}" stepKey="seeBlockIsEnabled" />
+
+        <selectOption userInput="Everything" selector="{{AdminChangelogSection.timeDropdown}}" stepKey="selectOption1"/>
+        <clickWithLeftButton selector="{{AdminChangelogSection.applyButton}}" stepKey="clickButton1"/>
+        <waitForAjaxLoad stepKey="waitForAjaxLoad"/>
+
+        <seeElement selector="div.changelog-module" stepKey="seeBox"/>
+    </test>
+</tests>
