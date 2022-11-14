@@ -124,6 +124,12 @@
                         <overview>Adjusted integration test</overview>
                     </entry>
                 </tag>
+                <tag version="1.3.4" date="2022-11-14">
+                    <entry>
+                        <type>FIX</type>
+                        <overview>Fix JS logic in order to properly select date range using small calendar btn</overview>
+                    </entry>
+                </tag>
             </changelog>
     </module>
 </config>
