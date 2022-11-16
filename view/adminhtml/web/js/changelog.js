@@ -1,10 +1,11 @@
 define([
     'jquery',
-    'mage/translate',
     'moment',
     'mage/calendar',
-    'Magento_Ui/js/modal/modal'
-], function ($, t,  moment, calendar, modal) {
+    'Magento_Ui/js/modal/modal',
+    'mage/translate',
+    'domReady!'
+], function ($, moment, calendar, modal) {
     "use strict";
     var options = {
         type: 'slide',
@@ -22,36 +23,32 @@ define([
         const $fromPicker = $('#from-picker');
         const $toPicker = $('#to-picker');
 
-        const $uiDatePickerTrigger = $(".ui-datepicker-trigger");
-        $(document).ready(function () {
-            const $changelogToInput =  $('#changelog-to input');
-            const $changelogFromInput =  $('#changelog-from input');
+        const $changelogDatePickerBtn = $(".changelog-datepicker-btn");
+        const $changelogToInput =  $('#changelog-to input');
+        const $changelogFromInput =  $('#changelog-from input');
 
-            $('#Changelog').css('background', 'none');
+        $('#Changelog').css('background', 'none');
 
-            $fromPicker.datetimepicker({dateFormat: "yy-mm-dd"});
-            $uiDatePickerTrigger.removeAttr("style");
-            $uiDatePickerTrigger.click(function () {
-                $fromPicker.focus();
+        $fromPicker.datetimepicker({dateFormat: "yy-mm-dd"});
+        $toPicker.datetimepicker({dateFormat: "yy-mm-dd"});
+        $changelogDatePickerBtn.removeAttr("style");
+        
+        $changelogDatePickerBtn.each(function(){
+            $(this).on('click', function() {
+                $(this).prev().focus();
             });
-
-            $toPicker.datetimepicker({dateFormat: "mm/dd/yy"});
-            $uiDatePickerTrigger.removeAttr("style");
-            $uiDatePickerTrigger.click(function () {
-                $toPicker.focus();
-            });
-
-            const from = moment().subtract(7, 'days').format('YYYY-MM-DD');
-            const to = moment().format('YYYY-MM-DD');
-            $fromPicker.val(from);
-            $toPicker.val(to);
-
-            $fromPicker.attr('disabled', 'disabled');
-            $changelogToInput.addClass('disabled')
-
-            $toPicker.attr('disabled', 'disabled');
-            $changelogFromInput.addClass('disabled')
         });
+
+        const from = moment().subtract(7, 'days').format('YYYY-MM-DD');
+        const to = moment().format('YYYY-MM-DD');
+        $fromPicker.val(from);
+        $toPicker.val(to);
+
+        $fromPicker.attr('disabled', 'disabled');
+        $changelogToInput.addClass('disabled')
+
+        $toPicker.attr('disabled', 'disabled');
+        $changelogFromInput.addClass('disabled');
 
         $('#time-helper').on('change', function(){
             const $changelogToInput =  $('#changelog-to input');

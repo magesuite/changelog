@@ -26,13 +26,13 @@
         </li>
         <li id="picker-from">
             <input name="from" id="from-picker" class="from-picker admin__control-text" value="04/03/2017 06:50"/>
-            <button type="button" style="display:none;" class="ui-datepicker-trigger v-middle">
+            <button type="button" style="display:none;" class="changelog-datepicker-btn ui-datepicker-trigger v-middle">
                 <span>Select Date</span>
             </button>
         </li>
         <li id="picker-to">
             <input name="to" id="to-picker" class="to-picker admin__control-text" value="04/12/2017 06:49"/>
-            <button type="button" style="display:none;" class="ui-datepicker-trigger v-middle">
+            <button type="button" style="display:none;" class="changelog-datepicker-btn ui-datepicker-trigger v-middle">
                 <span>Select Date</span>
             </button>
         </li>
@@ -44,31 +44,23 @@
         </li>
     </ul>
     </div>
-
-
     <div id="modal" style="display: none;">
         <div class="modal-body-content">
             <p><?= $block->escapeHtml(__('Content')) ?></p>
         </div>
     </div>
-
     <div id="changelog-content"></div>
 </div>
-
 <script type="text/x-magento-init">
-        {
-            "*": {
-                "changelog": {
-                    "baseChangelogUrl": "<?= $block->escapeJsQuote($block->getUrl('changelog/changelog/get', ['_current' => true]));?>",
-                    "baseDownloadChangelogUrl": "<?= $block->escapeJsQuote($block->getUrl('changelog/changelog/markdown', ['_current' => true]));?>",
-                    "trackerUrl" : "<?= $block->escapeJsQuote($block->getTrackerUrl());?>",
-                    "lastDeploymentDate" : "<?= $block->escapeJsQuote($block->getDateOfLastDeployment());?>",
-                    "markdownPreviewUrl":  "<?= $block->escapeJsQuote($block->getUrl('changelog/changelog/preview', ['_current' => true]));?>"
-                }
+    {
+        "*": {
+            "changelog": {
+                "baseChangelogUrl": "<?= $block->escapeJsQuote($block->getUrl('changelog/changelog/get', ['_current' => true]));?>",
+                "baseDownloadChangelogUrl": "<?= $block->escapeJsQuote($block->getUrl('changelog/changelog/markdown', ['_current' => true]));?>",
+                "trackerUrl" : "<?= $block->escapeJsQuote($block->getTrackerUrl());?>",
+                "lastDeploymentDate" : "<?= $block->escapeJsQuote($block->getDateOfLastDeployment());?>",
+                "markdownPreviewUrl":  "<?= $block->escapeJsQuote($block->getUrl('changelog/changelog/preview', ['_current' => true]));?>"
             }
         }
+    }
 </script>
-
-<style>
-
-</style>
