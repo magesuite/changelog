@@ -32,7 +32,7 @@ define([
         $fromPicker.datetimepicker({dateFormat: "yy-mm-dd"});
         $toPicker.datetimepicker({dateFormat: "yy-mm-dd"});
         $changelogDatePickerBtn.removeAttr("style");
-        
+
         $changelogDatePickerBtn.each(function(){
             $(this).on('click', function() {
                 $(this).prev().focus();

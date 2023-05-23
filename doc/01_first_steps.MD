@@ -43,4 +43,3 @@ Possible nodes are:
  - `<ticket_id>` - if change has its source on your tracking system, you can use it here (make sure to setup tracking URL in configuration)
  - `<highlighted>` - you can increase prominency of your change
  - `<url>` - you can link change with documentation/product URL
-
