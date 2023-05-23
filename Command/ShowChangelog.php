@@ -56,5 +56,7 @@ class ShowChangelog extends \Symfony\Component\Console\Command\Command
         }
 
         $output->writeln('-- Listing completed.');
+
+        return \Magento\Framework\Console\Cli::RETURN_SUCCESS;
     }
 }
