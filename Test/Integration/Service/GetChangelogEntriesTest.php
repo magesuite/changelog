@@ -17,7 +17,6 @@ class GetChangelogEntriesTest extends \PHPUnit\Framework\TestCase
     public function setUp(): void
     {
         $this->objectManager = \Magento\TestFramework\ObjectManager::getInstance();
-        $this->addChangelogEntriesToDatabaselog = $this->objectManager->get(\MageSuite\Changelog\Service\AddChangelogEntriesToDatabase::class);
         $this->getChangelogEntries = $this->objectManager->get(\MageSuite\Changelog\Service\GetChangelogEntries::class);
     }
 

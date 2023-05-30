@@ -6,6 +6,7 @@ class GetTest extends \Magento\TestFramework\TestCase\AbstractBackendController
     protected $addChangelogEntriesToDatabase;
     protected $cacheTypeList;
     protected $cache;
+    protected $objectManager;
 
     public function setUp(): void
     {
