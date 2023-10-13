@@ -19,7 +19,7 @@ class MarkdownTest extends \Magento\TestFramework\TestCase\AbstractBackendContro
 
         $result = $this->getResponse()->getBody();
 
-        $this->assertStringEqualsFile(__DIR__ . '/../../_files/dummy_changelog.md', $result);
+        $this->assertEquals(rtrim(file_get_contents(__DIR__ . '/../../_files/dummy_changelog.md')), $result);
     }
 
     private function prepareMocks()
