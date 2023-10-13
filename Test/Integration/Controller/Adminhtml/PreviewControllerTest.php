@@ -1,6 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Magesuite\Changelog\Test\Integration\Controller\Adminhtml;
 
+/**
+ * @magentoAppArea adminhtml
+ * @magentoDbIsolation enabled
+ */
 class PreviewControllerTest extends \Magento\TestFramework\TestCase\AbstractBackendController
 {
 

@@ -1,6 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Magesuite\Changelog\Test\Integration\Controller\Adminhtml;
 
+/**
+ * @magentoAppArea adminhtml
+ * @magentoDbIsolation enabled
+ */
 class GetTest extends \Magento\TestFramework\TestCase\AbstractBackendController
 {
     protected $addChangelogEntriesToDatabase;
