@@ -10,9 +10,6 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {
-        "erusev/parsedown" : "^2.0.0"
-    },
     "autoload": {
         "files": [
             "registration.php"

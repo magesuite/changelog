@@ -7,21 +7,22 @@ class Preview extends \MageSuite\Changelog\Controller\Adminhtml\Changelog\Abstra
     public function execute()
     {
         $reference = $this->getRequest()->getPostValue('filename');
-        if (empty($reference)) {
+
+        if (empty($reference) || !preg_match('/^[a-zA-Z0-9_\-]+$/', $reference)) {
             return $this;
         }
 
-        $filename =  $this->getFilename($reference);
-        // phpcs:ignore
-        $parsedContent = $this->parseDown->toHtml(file_get_contents($filename))."\n";
-
+        $filename = $this->getFilename($reference);
         $result = $this->resultRawFactory->create();
-        $result->setContents($parsedContent);
+        // phpcs:ignore
+        if (file_exists($filename)) {
+            $result->setContents(nl2br(htmlspecialchars(file_get_contents($filename))));
+        }
 
         return $result;
     }
 
-    protected function getFilename($docReference): string
+    protected function getFilename(string $docReference): string
     {
         return sprintf('%s/../../../doc/%s.MD', __DIR__, $docReference);
     }

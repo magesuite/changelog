@@ -87,7 +87,7 @@ class ChangelogRepository implements \MageSuite\Changelog\Api\ChangelogRepositor
      * {@inheritdoc}
      */
     public function getList(
-        \Magento\Framework\Api\SearchCriteriaInterface $criteria = null
+        ?\Magento\Framework\Api\SearchCriteriaInterface $criteria = null
     ) {
         $collection = $this->changelogCollectionFactory->create();
 
@@ -108,7 +108,7 @@ class ChangelogRepository implements \MageSuite\Changelog\Api\ChangelogRepositor
         return $searchResults;
     }
 
-    public function getListAsNestedArray($criteria = null, $groupingKey = 'module')
+    public function getListAsNestedArray(?\Magento\Framework\Api\SearchCriteriaInterface $criteria = null, $groupingKey = 'module')
     {
         $list = $this->getList($criteria);
         $entries = [];
@@ -120,7 +120,7 @@ class ChangelogRepository implements \MageSuite\Changelog\Api\ChangelogRepositor
         return $grouped;
     }
 
-    public function getListAsTimeline($criteria = null, $groupingKey = 'version_date')
+    public function getListAsTimeline(?\Magento\Framework\Api\SearchCriteriaInterface $criteria = null, $groupingKey = 'version_date')
     {
         $list = $this->getList($criteria);
         $entries = [];

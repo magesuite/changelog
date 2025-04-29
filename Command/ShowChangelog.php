@@ -18,7 +18,7 @@ class ShowChangelog extends \Symfony\Component\Console\Command\Command
         \MageSuite\Changelog\Service\FlattenChangelogFactory $flattenChangelogFactory,
         \MageSuite\Changelog\Service\SaveChangelogInDatabaseFactory $saveChangelogInDatabaseFactory,
         \MageSuite\Changelog\Service\GroupChangelogByKeyFactory $groupChangelogByKeyFactory,
-        string $name = null
+        ?string $name = null
     ) {
         parent::__construct($name);
         $this->dataConfigFactory = $dataConfigFactory;

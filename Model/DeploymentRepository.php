@@ -91,7 +91,7 @@ class DeploymentRepository implements \MageSuite\Changelog\Api\DeploymentReposit
     }
 
     public function getList(
-        \Magento\Framework\Api\SearchCriteriaInterface $criteria = null
+        ?\Magento\Framework\Api\SearchCriteriaInterface $criteria = null
     ) {
         $searchResults = $this->searchResultsFactory->create();
         $collection = $this->deploymentCollectionFactory->create();

@@ -29,7 +29,7 @@ interface ChangelogRepositoryInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getList(
-        \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
+        ?\Magento\Framework\Api\SearchCriteriaInterface $criteria = null
     );
 
     /**
