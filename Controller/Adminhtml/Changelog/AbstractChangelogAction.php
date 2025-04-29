@@ -4,9 +4,11 @@ namespace MageSuite\Changelog\Controller\Adminhtml\Changelog;
 
 abstract class AbstractChangelogAction extends \Magento\Backend\App\Action
 {
+    protected \Magento\Framework\Controller\Result\JsonFactory $jsonResultFactory;
+    protected \Magento\Framework\Api\FilterBuilder $filterBuilder;
+    protected \Magento\Framework\Api\Search\SearchCriteriaBuilder $searchCriteriaBuilder;
+    protected \Magento\Framework\Controller\Result\RawFactory $resultRawFactory;
     protected \MageSuite\Changelog\Service\GetChangelogEntries $getChangelogEntries;
-
-    protected \Erusev\Parsedown\Parsedown $parseDown;
 
     const ADMIN_RESOURCE = 'MageSuite_Changelog::Changelog';
 
@@ -16,23 +18,16 @@ abstract class AbstractChangelogAction extends \Magento\Backend\App\Action
         \Magento\Framework\Controller\Result\JsonFactory $jsonResultFactory,
         \Magento\Framework\Controller\Result\RawFactory $resultRawFactory,
         \Magento\Framework\Api\Search\SearchCriteriaBuilder $searchCriteriaBuilder,
-        \Magento\Framework\Api\FilterBuilder $filterBuilder,
-        \Erusev\Parsedown\Parsedown $parseDown
+        \Magento\Framework\Api\FilterBuilder $filterBuilder
     ) {
         $this->getChangelogEntries = $getChangelogEntries;
         $this->jsonResultFactory = $jsonResultFactory;
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
         $this->filterBuilder = $filterBuilder;
         $this->resultRawFactory = $resultRawFactory;
-        $this->parseDown = $parseDown;
 
         parent::__construct($context);
     }
-
-    protected \Magento\Framework\Controller\Result\JsonFactory $jsonResultFactory;
-    protected \Magento\Framework\Api\FilterBuilder $filterBuilder;
-    protected \Magento\Framework\Api\Search\SearchCriteriaBuilder $searchCriteriaBuilder;
-    protected \Magento\Framework\Controller\Result\RawFactory $resultRawFactory;
 
     protected function getEntries()
     {
