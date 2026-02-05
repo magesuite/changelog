@@ -10,10 +10,10 @@ namespace Magesuite\Changelog\Test\Integration\Controller\Adminhtml;
  */
 class GetTest extends \Magento\TestFramework\TestCase\AbstractBackendController
 {
-    protected $addChangelogEntriesToDatabase;
-    protected $cacheTypeList;
-    protected $cache;
-    protected $objectManager;
+    protected \MageSuite\Changelog\Service\AddChangelogEntriesToDatabase $addChangelogEntriesToDatabase;
+    protected \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList;
+    protected \Magento\Framework\Config\CacheInterface $cache;
+    protected \Magento\Framework\App\ObjectManager $objectManager;
 
     public function setUp(): void
     {
@@ -25,7 +25,7 @@ class GetTest extends \Magento\TestFramework\TestCase\AbstractBackendController
         parent::setUp();
     }
 
-    private function fetchChangelogEntries($params)
+    protected function fetchChangelogEntries(array $params): string
     {
         $this->getRequest()->setMethod(\Magento\Framework\App\Request\Http::METHOD_GET);
         $this->getRequest()->setParams($params);
@@ -38,7 +38,7 @@ class GetTest extends \Magento\TestFramework\TestCase\AbstractBackendController
      * @magentoDbIsolation enabled
      * @magentoAppIsolation enabled
      */
-    public function testItFetchesChangelogEntriesAsJson()
+    public function testItFetchesChangelogEntriesAsJson(): void
     {
         $getData = [
             'mode' => 'grouped',
@@ -55,10 +55,10 @@ class GetTest extends \Magento\TestFramework\TestCase\AbstractBackendController
     /**
      * @magentoDbIsolation enabled
      * @magentoAppIsolation enabled
-     * @magentoDataFixture copyDummyChangelog
+     * @magentoDataFixture MageSuite_Changelog::Test/Integration/_files/copy_changelog.php
      * @magentoCache all disabled
      */
-    public function testItFetchesChangelogEntriesFromOtherExtensions()
+    public function testItFetchesChangelogEntriesFromOtherExtensions(): void
     {
         $getData = [
             'mode' => 'grouped',
@@ -77,15 +77,5 @@ class GetTest extends \Magento\TestFramework\TestCase\AbstractBackendController
 
         $this->assertArrayHasKey('change_overview', $entries['Module_Dummy']['1.0.0'][0]);
         $this->assertEquals('Initial release of dummy changelog', $entries['Module_Dummy']['1.0.0'][0]['change_overview']);
-    }
-
-    public static function copyDummyChangelog()
-    {
-        require __DIR__ . '/../../_files/copy_changelog.php';
-    }
-
-    public static function copyDummyChangelogRollback()
-    {
-        require __DIR__ . '/../../_files/copy_changelog_rollback.php';
     }
 }
