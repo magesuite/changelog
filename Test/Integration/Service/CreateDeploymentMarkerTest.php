@@ -1,18 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MageSuite\Changelog\Test\Integration\Service;
 
 class CreateDeploymentMarkerTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var \Magento\Framework\App\ObjectManager
-     */
-    private $objectManager;
-
-    /**
-     * @var mixed
-     */
-    private $createDeploymentMarker;
+    protected ?\Magento\Framework\App\ObjectManager $objectManager;
+    protected ?\MageSuite\Changelog\Service\Deployment\CreateDeploymentMarker $createDeploymentMarker;
 
     public function setUp(): void
     {

@@ -1,18 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MageSuite\Changelog\Test\Integration\Model;
 
 class CustomChangelogPathsPoolTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var \Magento\TestFramework\ObjectManager
-     */
-    private $objectManager;
-
-    /**
-     * @var \MageSuite\Changelog\Model\CustomChangelogPathsPool
-     */
-    private $customChangelogPathsPool;
+    protected ?\Magento\TestFramework\ObjectManager $objectManager;
+    protected ?\MageSuite\Changelog\Model\CustomChangelogPathsPool $customChangelogPathsPool;
 
     public function setUp(): void
     {

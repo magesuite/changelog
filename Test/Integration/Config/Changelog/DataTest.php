@@ -1,33 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MageSuite\Changelog\Test\Integration\Config;
 
 class DataTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var \Magento\TestFramework\ObjectManager
-     */
-    private $objectManager;
-
-    /**
-     * @var \MageSuite\Changelog\Service\AddChangelogEntriesToDatabase
-     */
-    private $processChangelog;
-
-    /**
-     * @var \MageSuite\Changelog\Model\ChangelogRepository
-     */
-    private $changelogRepository;
-
-    /**
-     * @var \MageSuite\Changelog\Model\DeploymentRepository
-     */
-    private $deploymentRepository;
-
-    /**
-     * @var \MageSuite\Changelog\Config\Changelog\Data
-     */
-    private $data;
+    protected ?\Magento\TestFramework\ObjectManager $objectManager;
+    protected ?\MageSuite\Changelog\Service\AddChangelogEntriesToDatabase $processChangelog;
+    protected ?\MageSuite\Changelog\Model\ChangelogRepository $changelogRepository;
+    protected ?\MageSuite\Changelog\Model\DeploymentRepository $deploymentRepository;
+    protected ?\MageSuite\Changelog\Config\Changelog\Data $data;
 
     public function setUp(): void
     {
