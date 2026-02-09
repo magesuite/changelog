@@ -1,23 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MageSuite\Changelog\Test\Integration\Service;
 
 class ProcessChangelogTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var \Magento\TestFramework\ObjectManager
-     */
-    private $objectManager;
-
-    /**
-     * @var \MageSuite\Changelog\Model\ChangelogRepository
-     */
-    private $changelogRepository;
-
-    /**
-     * @var \MageSuite\Changelog\Model\DeploymentRepository
-     */
-    private $deploymentRepository;
+    protected ?\Magento\TestFramework\ObjectManager $objectManager;
+    protected ?\MageSuite\Changelog\Model\ChangelogRepository $changelogRepository;
+    protected ?\MageSuite\Changelog\Model\DeploymentRepository $deploymentRepository;
 
     public function setUp(): void
     {

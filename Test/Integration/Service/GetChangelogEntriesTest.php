@@ -1,18 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MageSuite\Changelog\Test\Integration\Service;
 
 class GetChangelogEntriesTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var \Magento\TestFramework\ObjectManager
-     */
-    private $objectManager;
-
-    /**
-     * @var \MageSuite\Changelog\Service\GetChangelogEntries
-     */
-    private $getChangelogEntries;
+    protected ?\Magento\TestFramework\ObjectManager $objectManager;
+    protected ?\MageSuite\Changelog\Service\GetChangelogEntries $getChangelogEntries;
 
     public function setUp(): void
     {

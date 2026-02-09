@@ -10,10 +10,10 @@ namespace Magesuite\Changelog\Test\Integration\Controller\Adminhtml;
  */
 class GetTest extends \Magento\TestFramework\TestCase\AbstractBackendController
 {
-    protected \MageSuite\Changelog\Service\AddChangelogEntriesToDatabase $addChangelogEntriesToDatabase;
-    protected \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList;
-    protected \Magento\Framework\Config\CacheInterface $cache;
-    protected \Magento\Framework\App\ObjectManager $objectManager;
+    protected ?\MageSuite\Changelog\Service\AddChangelogEntriesToDatabase $addChangelogEntriesToDatabase;
+    protected ?\Magento\Framework\App\Cache\TypeListInterface $cacheTypeList;
+    protected ?\Magento\Framework\Config\CacheInterface $cache;
+    protected ?\Magento\Framework\App\ObjectManager $objectManager;
 
     public function setUp(): void
     {
