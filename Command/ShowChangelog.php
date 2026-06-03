@@ -27,7 +27,7 @@ class ShowChangelog extends \Symfony\Component\Console\Command\Command
         $this->groupChangelogByKeyFactory = $groupChangelogByKeyFactory;
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('magesuite:changelog:show');
         $this->setDescription('Lists all changelog entries as flat list.');
