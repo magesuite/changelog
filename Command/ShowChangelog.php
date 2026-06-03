@@ -27,14 +27,16 @@ class ShowChangelog extends \Symfony\Component\Console\Command\Command
         $this->groupChangelogByKeyFactory = $groupChangelogByKeyFactory;
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('magesuite:changelog:show');
         $this->setDescription('Lists all changelog entries as flat list.');
     }
 
-    protected function execute(\Symfony\Component\Console\Input\InputInterface $input, \Symfony\Component\Console\Output\OutputInterface $output)
-    {
+    protected function execute(
+        \Symfony\Component\Console\Input\InputInterface $input,
+        \Symfony\Component\Console\Output\OutputInterface $output
+    ): int {
         $dataConfig = $this->dataConfigFactory->create();
         $flattenChangelog = $this->flattenChangelogFactory->create();
 
